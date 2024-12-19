@@ -17,7 +17,7 @@
 		
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-		
+
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<!-- Nice Select CSS -->
@@ -46,13 +46,13 @@
     <body>
 		<!-- Preloader -->
         <div class="preloader">
-			<div class="loader">
-				<div class="loader-outter"></div>
+            <div class="loader">
+                <div class="loader-outter"></div>
                 <div class="loader-inner"></div>
-				
+
                 <div class="indicator"> 
-					<svg width="16px" height="12px">
-						<polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
                         <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
                     </svg>
                 </div>
@@ -61,90 +61,107 @@
         <!-- End Preloader -->
 		
 		<my-header></my-header>
+		<style>
+			/* General styling
+			body {
+				margin: 0;
+				font-family: Arial, sans-serif;
+				background-color: #f8f9fa;
+			} */
+	
+			/* .section {
+				padding: 50px 0;
+			}
+	
+			.container {
+				width: 80%;
+				margin: 0 auto;
+			} */
+	
+			/* .row {
+				display: flex;
+				justify-content: center;
+			}
+	
+			.col-12, .col-lg-6 {
+				flex: 0 0 100%;
+				max-width: 100%;
+			}
+	
+			.col-lg-6 {
+				max-width: 50%;
+			} */
+	
+			.error-inner {
+				text-align: center;
+				background-color: #ffffff;
+				padding: 40px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				border-radius: 8px;
+			}
+	
+			/* h1 {
+				font-size: 48px;
+				margin: 0 0 20px;
+				color: #28a745;
+			}
+	 */
+			/* h1 span {
+				display: block;
+				font-size: 18px;
+				color: #666;
+				margin-top: 10px;
+			}
+	
+			p {
+				color: #444;
+				font-size: 16px;
+				line-height: 1.5;
+				margin-bottom: 20px;
+			} */
+	
+			/* .btn {
+				display: inline-block;
+				padding: 10px 20px;
+				background-color: #28a745;
+				color: #ffffff;
+				font-size: 16px;
+				text-decoration: none;
+				border-radius: 5px;
+				transition: background-color 0.3s ease;
+			} */
+	
+			/* .btn:hover {
+				background-color: #218838;
+			} */
+	
+			.icon-success {
+				font-size: 80px;
+				color: #28a745;
+				margin-bottom: 20px;
+			}
+		</style>
 		
-
-    <!-- Start Wishlist -->
-		<div class="wishlist-container">
-      <section aria-label="Wishlist Section">
-        <div class="section-header">
-          <div class="header-left">
-            <div class="category-indicator"></div>
-            <h2 class="section-judul">Your Wishlist!</h2>
-          </div>
-          <button class="see-all-btn">See All</button>
-        </div>
-        
-        <div class="products-grid">
-          <article class="product-card">
-            <div class="product-image-container">
-              <span class="discount-badge">-35%</span>
-              <img src="img/canang.png" alt="Canang product" class="product-image">
-              <button class="wishlist-btn" aria-label="Add to wishlist">
-                <i class="icofont icofont-trash"></i>
-              </button>
-              <button class="btn" style="width: 100%; padding: 2%;">
-                <i class="icofont icofont-ui-cart" alt="" aria-hidden="true"></i>
-                Add To Cart
-              </button>
-            </div>
-            <div class="product-info">
-              <h3 class="product-title">Canang</h3>
-              <div class="price-container">
-                <span class="current-price">Rp. 5000</span>
-                <span class="original-price">Rp. 10000</span>
-              </div>
-            </div>
-          </article>
-          <article class="product-card">
-            <div class="product-image-container">
-              <span class="discount-badge">-35%</span>
-              <img src="img/canang.png" alt="Canang product" class="product-image">
-              <button class="wishlist-btn" aria-label="Add to wishlist">
-                <i class="icofont icofont-trash"></i>
-              </button>
-              <button class="btn" style="width: 100%; padding: 2%;">
-                <i class="icofont icofont-ui-cart" alt="" aria-hidden="true"></i>
-                Add To Cart
-              </button>
-            </div>
-            <div class="product-info">
-              <h3 class="product-title">Canang</h3>
-              <div class="price-container">
-                <span class="current-price">Rp. 5000</span>
-                <span class="original-price">Rp. 10000</span>
-              </div>
-            </div>
-          </article>
-          <article class="product-card">
-            <div class="product-image-container">
-              <span class="discount-badge">-35%</span>
-              <img src="img/canang.png" alt="Canang product" class="product-image">
-              <button class="wishlist-btn" aria-label="Add to wishlist">
-                <i class="icofont icofont-trash"></i>
-              </button>
-              <button class="btn" style="width: 100%; padding: 2%;">
-                <i class="icofont icofont-ui-cart" alt="" aria-hidden="true"></i>
-                Add To Cart
-              </button>
-            </div>
-            <div class="product-info">
-              <h3 class="product-title">Canang</h3>
-              <div class="price-container">
-                <span class="current-price">Rp. 5000</span>
-                <span class="original-price">Rp. 10000</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </div>
-
-    <!-- End Wishlist -->
+		<section class="error-page section">
+			<div class="container">
+				<div class="row">
+					<div class="error-inner">
+						<i class="fa fa-check-circle icon-success"></i>
+						<h1>Payment Successful!<span>Thank you for your payment.</span></h1>
+						<p>Your transaction has been completed successfully. You will receive a confirmation email shortly.</p>
+						<a href="indexLog.html" style="color: white;"  class="btn">Back to Home</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	
 		
 		<my-footer></my-footer>
 		
+
+
 		<!-- header footer JS -->
-		<script src="js/headerfooterLogin.js"></script>
+		 <script src="js/headerfooterManage.js"></script>
 		<!-- jquery Min JS -->
         <script src="js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->
