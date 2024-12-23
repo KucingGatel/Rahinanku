@@ -32,8 +32,14 @@ class MyHeader extends HTMLElement {
 													<li><a href="404.html">Rahinan</a></li>
 													<li><a href="404.html">Otonanan</a></li>
 													<li><a href="404.html">Ngaben</a></li>
+													<li><a href="404.html">Nganten</a></li>
+													<li><a href="404.html">Odalan</a></li>
+													<li><a href="404.html">Rahinan</a></li>
+													<li><a href="404.html">Otonanan</a></li>
+													<li><a href="404.html">Ngaben</a></li>
 												</ul>
 											</li>
+											<li><a href="artikel.html">Blogs</a>
 											<li><a href="artikel.html">Blogs</a>
 											</li>
 										</ul>
@@ -43,6 +49,7 @@ class MyHeader extends HTMLElement {
 							</div>
 							<login class="col-lg-2 col-12">
 								<div class="get-quote">
+									<a href="login.html" class="btn">Login</a>
 									<a href="indexLog.html" class="btn">Login</a>
 								</div>
 							</login>

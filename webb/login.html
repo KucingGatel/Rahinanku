@@ -1,3 +1,508 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="Site keywords here" />
+    <meta name="description" content="" />
+    <meta name="copyright" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Title -->
+    <title>Login</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="css/nice-select.css" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="css/icofont.css" />
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="css/slicknav.min.css" />
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="css/owl-carousel.css" />
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="css/datepicker.css" />
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" />
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <style>
+      body {
+        overflow: hidden;
+      }
+
+      .login-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 848px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 59px 70px;
+      }
+      .background-image {
+        position: fixed;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .login {
+        display: flex;
+        flex-direction: column;
+        min-height: 848px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login .overlap-wrapper {
+        background-color: #ffffff;
+        height: 779px;
+        overflow: hidden;
+        width: 1546px;
+      }
+
+      .login .overlap {
+        height: 841px;
+        left: -180px;
+        position: relative;
+        top: -62px;
+        width: 1726px;
+      }
+
+      .login .group {
+        height: 841px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 1726px;
+      }
+
+      .login .overlap-group {
+        background-image: url(./julia-solonina-csja8o0sbow-unsplash-1.png);
+        background-position: 50% 50%;
+        background-size: cover;
+        height: 779px;
+        left: 180px;
+        position: relative;
+        top: 62px;
+        width: 1546px;
+      }
+
+      .login .whatsapp-image {
+        height: 779px;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 661px;
+      }
+
+      .login .rectangle {
+        background-color: var(--black);
+        height: 779px;
+        left: 180px;
+        opacity: 0.8;
+        position: absolute;
+        top: 62px;
+        width: 1546px;
+      }
+
+      .login .frame-wrapper {
+        background-color: var(--white);
+        border-radius: 24px;
+        box-shadow: 0px 4px 20px #ffffff40;
+        height: 581px;
+        left: 709px;
+        position: absolute;
+        top: 62px;
+        width: 512px;
+      }
+
+      .login .frame {
+        align-items: center;
+        display: inline-flex;
+        flex-direction: column;
+        gap: 24px;
+        left: 59px;
+        position: relative;
+        top: 40px;
+      }
+
+      .login .header {
+        align-items: center;
+        background-color: transparent;
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 100px;
+        position: relative;
+      }
+
+      .login .text-wrapper {
+        color: var(--black);
+        font-family: "Open Sans-Bold", Helvetica;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-top: -1px;
+        position: relative;
+        width: 246px;
+      }
+
+      .login .img {
+        height: 24px;
+        position: relative;
+        width: 24px;
+      }
+
+      .login .div {
+        align-items: flex-end;
+        display: inline-flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        position: relative;
+      }
+
+      .login .input {
+        align-items: flex-start;
+        display: inline-flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+      }
+
+      .login .email-address {
+        background: transparent;
+        border: none;
+        color: var(--black);
+        font-family: "Open Sans-SemiBold", Helvetica;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-top: -1px;
+        opacity: 0.6;
+        padding: 0;
+        position: relative;
+        width: fit-content;
+      }
+
+      .login .input-2 {
+        align-items: flex-start;
+        background-color: var(--white);
+        border: 1px solid;
+        border-color: #33333333;
+        border-radius: 8px;
+        color: var(--black);
+        display: inline-flex;
+        flex: 0 0 auto;
+        font-family: "Open Sans-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        gap: 10px;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-top: -1px;
+        padding: 14px 24px;
+        position: relative;
+        width: 320px;
+      }
+
+      .login .text-wrapper-2 {
+        color: var(--black);
+        font-family: "Open Sans-SemiBold", Helvetica;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-top: -1px;
+        opacity: 0.6;
+        position: relative;
+        width: fit-content;
+      }
+
+      .login .input-3 {
+        align-items: flex-start;
+        background-color: var(--white);
+        border: 1px solid;
+        border-color: #33333333;
+        border-radius: 8px;
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 10px;
+        padding: 14px 24px;
+        position: relative;
+      }
+
+      .login .text-wrapper-3 {
+        color: var(--black);
+        font-family: "Open Sans-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-top: -1px;
+        opacity: 0.5;
+        position: relative;
+        width: 286px;
+      }
+
+      .login .check {
+        align-items: flex-start;
+        display: flex;
+        flex: 0 0 auto;
+        gap: 10px;
+        position: relative;
+        width: 149px;
+      }
+
+      .login .text-wrapper-4 {
+        color: #33333399;
+        font-family: "Open Sans-Regular", Helvetica;
+        font-size: 14px;
+        font-weight: 400;
+        height: 19px;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-right: -58px;
+        margin-top: -1px;
+        position: relative;
+        width: 207px;
+      }
+
+      .login .frame-2 {
+        align-items: center;
+        display: inline-flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        gap: 6px;
+        position: relative;
+      }
+
+      .login .CTA-buuton-fill {
+        align-items: flex-start;
+        background-color: #f98b02;
+        border-radius: 50px;
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 10px;
+        padding: 10px 24px;
+        position: relative;
+      }
+
+      .login .text-wrapper-5 {
+        color: var(--white);
+        font-family: "Open Sans-SemiBold", Helvetica;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-top: -1px;
+        position: relative;
+        text-align: center;
+        width: 320px;
+      }
+
+      .login .text-wrapper-6 {
+        color: var(--black);
+        font-family: "Open Sans-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: normal;
+        opacity: 0.4;
+        position: relative;
+        text-align: center;
+        width: fit-content;
+      }
+
+      .login .CTA-buuton-fill-2 {
+        align-items: flex-start;
+        border: 1px solid;
+        border-color: #33333333;
+        border-radius: 50px;
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 10px;
+        padding: 10px 24px;
+        position: relative;
+      }
+
+      .login .text-wrapper-7 {
+        color: var(--black);
+        font-family: "Open Sans-SemiBold", Helvetica;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: normal;
+        margin-top: -1px;
+        opacity: 0.4;
+        position: relative;
+        text-align: center;
+        width: 286px;
+      }
+
+      .login .don-t-have-an {
+        color: transparent;
+        font-family: "Open Sans-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        height: 28px;
+        letter-spacing: 0;
+        line-height: normal;
+        position: relative;
+        width: 243px;
+      }
+
+      .login .span {
+        color: #333333;
+      }
+
+      .login .text-wrapper-8 {
+        color: #f98b02;
+        font-family: "Open Sans-SemiBold", Helvetica;
+        font-weight: 600;
+      }
+    </style>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="loader">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+
+        <div class="indicator">
+          <svg width="16px" height="12px">
+            <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <!-- End Preloader -->
+
+    <div class="login-container">
+      <img src="https://cdn.builder.io/api/v1/image/assets/f632c1b4c65d4af299059ec99b62b89b/9eaba87385a2796393e161b26dbcee3dafda6155d61bbe3ab868a567a62e097d?apiKey=f632c1b4c65d4af299059ec99b62b89b&" alt="" class="background-image" />
+      <div class="login">
+        <div class="overlap-wrapper">
+          <div class="overlap">
+            <div class="group">
+              <div class="overlap-group"></div>
+            </div>
+            <div class="frame-wrapper">
+              <div class="frame">
+                <header class="header">
+                  <div class="text-wrapper" style="display: flex; justify-content: center">Login</div>
+                </header>
+                <div class="div">
+                  <div class="input">
+                    <div>
+                      <div class="text-wrapper-2">Email Address</div>
+                      <div class="input-3" style="width: 404px; margin-top: 10px">
+                        <input class="input-2" placeholder="Enter your email address" type="email" style="border: none" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input">
+                    <div>
+                      <div class="text-wrapper-2">Password</div>
+                      <div class="input-3" style="width: 404px; margin-bottom: 10px">
+                        <input class="input-2" placeholder="Enter your password" type="password" style="border: none" />
+                      </div>
+                    </div>
+                  </div>
+                  <a href="forgot.html" ><div class="check"><div class="text-wrapper-4">Forgot your password?</div></div></a>
+                </div>
+                <div class="frame-2">
+                  <button type="submit" href="indexLog.html" class="btn" style="width: 350px;" >Sign Up</button>
+                  <!-- <div class="CTA-buuton-fill"><div class="text-wrapper-5">Sign In</div></div> -->
+                  <div class="text-wrapper-6">or</div>
+                  <div class="CTA-buuton-fill-2">
+                    <img
+                      src="https://cdn.builder.io/api/v1/image/assets/f632c1b4c65d4af299059ec99b62b89b/f30c74b7770bc50980741aefa466ac6b9e81923afed63f3dbc2fb21e7273a122?apiKey=f632c1b4c65d4af299059ec99b62b89b&"
+                      alt="Google logo"
+                      class="visibility-icon"
+                    />
+                    <!-- <button type="submit" href="indexLog.html" class="btn">Sign Up</button> -->
+                    <a href="google.com"><div style="color: black;"  class="text-wrapper-7">Sign In with Google</div></a>
+                  </div>
+                </div>
+                <a href="signup.html" ><p class="don-t-have-an"><span class="span">Don’t have an account ? </span> <span class="text-wrapper-8">Sign Up</span></p></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- login -->
+    <script src="js/headerfooterManage.js"></script>
+    <!-- jquery Min JS -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jquery Migrate JS -->
+    <script src="js/jquery-migrate-3.0.0.js"></script>
+    <!-- jquery Ui JS -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- Easing JS -->
+    <script src="js/easing.js"></script>
+    <!-- Color JS -->
+    <script src="js/colors.js"></script>
+    <!-- Popper JS -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="js/bootstrap-datepicker.js"></script>
+    <!-- Jquery Nav JS -->
+    <script src="js/jquery.nav.js"></script>
+    <!-- Slicknav JS -->
+    <script src="js/slicknav.min.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- Niceselect JS -->
+    <script src="js/niceselect.js"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="js/tilt.jquery.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="js/owl-carousel.js"></script>
+    <!-- counterup JS -->
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Steller JS -->
+    <script src="js/steller.js"></script>
+    <!-- Wow JS -->
+    <script src="js/wow.min.js"></script>
+    <!-- Magnific Popup JS -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
+
 <script>
   localStorage.removeItem('userData');
   localStorage.clear();
