@@ -1,3 +1,8 @@
+<script>
+  localStorage.removeItem('userData');
+  localStorage.clear();
+</script>
+
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
   <head>
@@ -41,6 +46,7 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+
   </head>
   <body>
     <style>
@@ -388,17 +394,21 @@
         font-weight: 600;
       }
     </style>
+
     <!-- Preloader -->
     <div class="preloader">
       <div class="loader">
-          <div class="loader-outter"></div>
-          <div class="loader-inner"></div>
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
 
-          <div class="indicator"> 
-            <img src="img/favicon.png">
-          </div>
+        <div class="indicator">
+          <svg width="16px" height="12px">
+            <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          </svg>
+        </div>
       </div>
-  </div>
+    </div>
     <!-- End Preloader -->
 
     <div class="login-container">
@@ -412,14 +422,15 @@
             <div class="frame-wrapper">
               <div class="frame">
                 <header class="header">
-                  <div class="text-wrapper" style="display: flex; justify-content: center">Login</div>
+                  <div class="text-wrapper" style="display: flex; margin-left: 10%;">Login</div>
                 </header>
                 <div class="div">
+                  <form id="loginForm" method="POST">
                   <div class="input">
                     <div>
                       <div class="text-wrapper-2">Email Address</div>
                       <div class="input-3" style="width: 404px; margin-top: 10px">
-                        <input class="input-2" placeholder="Enter your email address" type="email" style="border: none" />
+                        <input class="input-2" placeholder="Enter your email address" type="email" id="email" style="border: none" required/>
                       </div>
                     </div>
                   </div>
@@ -427,14 +438,14 @@
                     <div>
                       <div class="text-wrapper-2">Password</div>
                       <div class="input-3" style="width: 404px; margin-bottom: 10px">
-                        <input class="input-2" placeholder="Enter your password" type="password" style="border: none" />
+                        <input class="input-2" placeholder="Enter your password" type="password" id="password" style="border: none" required/>
                       </div>
                     </div>
                   </div>
-                  <a href="forgot.html" ><div class="check"><div class="text-wrapper-4">Forgot your password?</div></div></a>
+                  <a href="forgotpw.html" ><div class="check"><div class="text-wrapper-4">Forgot your password?</div></div></a>
                 </div>
-                <div class="frame-2">
-                  <button type="submit" href="indexLog.html" class="btn" style="width: 350px;" >Sign In</button>
+                <div class="frame-2" style="margin-right: 23%;">
+                  <button type="submit" class="btn" style="width: 350px;" >Sign In</button>
                   <!-- <div class="CTA-buuton-fill"><div class="text-wrapper-5">Sign In</div></div> -->
                   <div class="text-wrapper-6">or</div>
                   <div class="CTA-buuton-fill-2">
@@ -447,7 +458,8 @@
                     <a href="google.com"><div style="color: black;"  class="text-wrapper-7">Sign In with Google</div></a>
                   </div>
                 </div>
-                <a href="signup.html" ><p class="don-t-have-an"><span class="span">Don’t have an account ? </span> <span class="text-wrapper-8">Sign Up</span></p></a>
+              </form>
+                <a href="signup.html" style="margin-right: 25%;"><p class="don-t-have-an"><span class="span">Don’t have an account ? </span> <span class="text-wrapper-8">Sign Up</span></p></a>
               </div>
             </div>
           </div>
@@ -497,10 +509,43 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
+
+    <script>
+      const loginForm = document.getElementById('loginForm');
+      loginForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+    
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+    
+        try {
+          const response = await fetch('http://localhost:3000/api/guest/Login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+          });
+    
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+    
+          const result = await response.json();
+    
+          if (result.success) {
+            console.log('Login berhasil:', result.data);
+            localStorage.setItem('userData', JSON.stringify(result.data));
+            alert(`Login berhasil! Anda akan diarahkan ke dashboard. ${result.data}`);
+            window.location.href = 'indexLog.html';
+          } else {
+            alert('Login gagal: ' + result.message);
+          }
+        } catch (error) {
+          console.error('Error saat login:', error);
+          alert('Terjadi kesalahan saat login.');
+        }
+      });
+    </script>
   </body>
 </html>
-
-<script>
-  localStorage.removeItem('userData');
-  localStorage.clear();
-</script>
