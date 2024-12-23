@@ -58,17 +58,24 @@ const mulaitransaksi = async (req,res) => {
             }
         });
 
-        const produk = await Product.findOne({
+        const productIds = cart_item.map(item => item.getDataValue('id_product'));
+
+        const produk = await Product.findAll({
             attributes: ['id_toko', 'harga', 'nama_product'],
             where: {
-                id_product: 'P001',
+                id_product : {
+                [Op.in]: productIds,
+                }
             }
         });
 
         const cekTransaksi = await Transaction.findAll({
-            attributes: ['id_transaction'],
+            attributes: ['id_transaction'], 
             where: {
-                id_user: id_user,
+                [Op.and] : [
+                    {id_user: id_user},
+                    {status: "Proses"}
+                ]
             }
         });
 
@@ -86,19 +93,31 @@ const mulaitransaksi = async (req,res) => {
                 harga: 0,
                 id_user: id_user,
                 id_address : address.getDataValue('id'),
-                id_toko: produk.getDataValue('id_toko')
+                id_toko: produk.getDataValue('id_toko'),
+                status: "Proses",
             });         
         }
 
-        for (let i = 0; i < cart_item.length; i++) {
-            // const element = cart_item[i];
-            // console.log(cart_item[i].getDataValue('kuantitas'));
-            const insertItemTransaksi = await Transaction_Item.create({
-                id_transaction_item: IdItem(id_user, cart_item[i].getDataValue('id_product')),
-                id_transaction : id_transaksi,
-                id_produk: cart_item[i].getDataValue('id_product'),
-                kuantitas: cart_item[i].getDataValue('kuantitas')
-            });
+        const cekItemTransaksi = await Transaction_Item.findAll({
+            where: {
+                id_produk : {
+                [Op.in]: productIds,
+                }
+            }
+        })
+
+
+        if (cekItemTransaksi.length != cart_item.length){
+            for (let i = 0; i < cart_item.length; i++) {
+                // const element = cart_item[i];
+                // console.log(cart_item[i].getDataValue('kuantitas'));
+                const insertItemTransaksi = await Transaction_Item.create({
+                    id_transaction_item: IdItem(id_user, cart_item[i].getDataValue('id_product')),
+                    id_transaction : id_transaksi,
+                    id_produk: cart_item[i].getDataValue('id_product'),
+                    kuantitas: cart_item[i].getDataValue('kuantitas')
+                });
+            }
         }
         
         res.status(201).json({success: true, data: address, produk});
@@ -111,121 +130,164 @@ const mulaitransaksi = async (req,res) => {
 
 const transaction = async (req,res) => {
     const { id_user,kuantitas, id_voucher } = req.body;
-    const { id_product } = req.params;
 
     try {
-        const id_data = await Personal_Data.findOne({
-            attributes: ['personal_data_id'],
-            where: {
-                account_id: id_user
-            }
-        });
     
-        const address = await Address.findOne({
-            attributes: ['name'],
+        const cart_item = await Cart_Item.findAll({
+            attributes: ['kuantitas', 'harga', 'id_product'],
             where: {
-                persoal_data_id : id_data.getDataValue('personal_data_id'),
-            }
-        });
-    
-        const produk = await Product.findOne({
-            attributes: ['harga', 'nama_product', 'stock', 'id_toko'],
-            where : {
-                id_product: id_product, 
+                id_keranjang: 'cart-' + id_user,
             }
         });
 
-        const idTransaksi = await Transaction.findOne({
-            attributes: ['id_transaction'],
+        const productIds = cart_item.map(item => item.getDataValue('id_product'));
+
+        const produk = await Product.findAll({
+            attributes: ['id_toko', 'harga', 'nama_product', 'stock'],
             where: {
-                id_user: id_user,
+                id_product : {
+                [Op.in]: productIds,
+                }
             }
-        })
+        });
 
         var harga = null;
-
-        produk.getDataValue('id')
     
+        // if (id_voucher != null) {
+        //     const voucher = await Voucher.findOne({
+        //         attributes: ['persen', 'minimal_transaction', 'maksimal_potongan'],
+        //         where: {
+        //             id_voucher: id_voucher,
+        //         },
+        //     });     
+               
+        //     const cekVoucher = await Voucher_Account.findOne({
+        //         attributes: ['status'],
+        //         where: {
+        //             [Op.and]: [
+        //                 { id_voucher: id_voucher},
+        //                 { account_id: id_user}
+        //             ]
+        //         }
+        //     });
+
+        //     const cart_item = await Cart_Item.findAll({
+        //         attributes: ['kuantitas', 'harga', 'id_product'],
+        //         where: {
+        //             id_keranjang: 'cart-' + id_user,
+        //         }
+        //     });
+    
+        //     if(kuantitas <= produk.getDataValue('stock') ){
+        //         if(cekVoucher){
+        //             harga = kuantitas * produk.getDataValue('harga');
+        //             if(produk.getDataValue('harga') >= voucher.getDataValue('minimal_transaction')){
+        //                 const diskon = harga * voucher.getDataValue('persen');
+        //                 if(diskon > harga){
+        //                     harga = harga - voucher.getDataValue('maksimal_potongan');
+        //                 }else{
+        //                     harga = harga - diskon;
+        //                 }
+        //             }
+        //         }else{
+        //             res.status(400).json({success: false, msg: "Kamu Tidak Memiliki Voucher"});
+        //         }
+        //     }else{
+        //         res.status(400).json({success: false, msg: "Stock Tidak Mencukupi"});
+        //     }
+        // }else{
+        //     if(kuantitas <= produk.getDataValue('stock') ){
+        //         harga = kuantitas * produk.getDataValue('harga');
+        //         console.log("test" + harga);
+        //     }else{
+        //         res.status(400).json({success: false, msg: "Stock Tidak Mencukupi"});
+        //     }
+        // }   
+        
         if (id_voucher != null) {
             const voucher = await Voucher.findOne({
                 attributes: ['persen', 'minimal_transaction', 'maksimal_potongan'],
                 where: {
                     id_voucher: id_voucher,
                 },
-            });     
-               
+            });
+        
             const cekVoucher = await Voucher_Account.findOne({
                 attributes: ['status'],
                 where: {
                     [Op.and]: [
-                        { id_voucher: id_voucher},
-                        { account_id: id_user}
+                        { id_voucher: id_voucher },
+                        { account_id: id_user }
                     ]
                 }
             });
-    
-            if(kuantitas <= produk.getDataValue('stock') ){
-                if(cekVoucher){
-                    harga = kuantitas * produk.getDataValue('harga');
-                    if(produk.getDataValue('harga') >= voucher.getDataValue('minimal_transaction')){
-                        const diskon = harga * voucher.getDataValue('persen');
-                        if(diskon > harga){
-                            harga = harga - voucher.getDataValue('maksimal_potongan');
-                        }else{
-                            harga = harga - diskon;
-                        }
-                    }
-                }else{
-                    res.status(400).json({success: false, msg: "Kamu Tidak Memiliki Voucher"});
-                }
-            }else{
-                res.status(400).json({success: false, msg: "Stock Tidak Mencukupi"});
-            }
-        }else{
-            if(kuantitas <= produk.getDataValue('stock') ){
-                harga = kuantitas * produk.getDataValue('harga');
-                console.log("test" + harga);
-            }else{
-                res.status(400).json({success: false, msg: "Stock Tidak Mencukupi"});
-            }
-        }   
         
+            if (!cekVoucher) {
+                res.status(400).json({ success: false, msg: "Kamu Tidak Memiliki Voucher" });
+                return;
+            }
+        
+            produk.forEach(async item => {
+                if (kuantitas <= item.getDataValue('stock')) {
+                    harga = kuantitas * item.getDataValue('harga');
+                    if (item.getDataValue('harga') >= voucher.getDataValue('minimal_transaction')) {
+                        const diskon = harga * voucher.getDataValue('persen');
+                        harga = diskon > voucher.getDataValue('maksimal_potongan') ?
+                            harga - voucher.getDataValue('maksimal_potongan') :
+                            harga - diskon;
+                    }
+                } else {
+                    res.status(400).json({ success: false, msg: "Stock Tidak Mencukupi" });
+                }
+            });
+        } else {
+            produk.forEach(async item => {
+                if (kuantitas <= item.getDataValue('stock')) {
+                    harga = kuantitas * item.getDataValue('harga');
+                } else {
+                    res.status(400).json({ success: false, msg: "Stock Tidak Mencukupi" });
+                }
+            });
+        }        
+
         if(harga != null){
             const updateTransaction = await Transaction.update(
                 {
                     harga: harga,
                     id_voucher: id_voucher,
+                    status: "Selesai"
                 },
                 {
                     where: {
-                        id_transaction: idTransaksi.getDataValue('id_transaction'),
+                        [Op.and] : [
+                            {id_user: id_user},
+                            {status: "Proses"}
+                        ]
                     }
                 }
             );
             
-            const addItem = await Transaction_Item.create({
-                id_transaction_item : IdItem(id_user, id_product),
-                id_transaction: idTransaksi.getDataValue('id_transaction'),
-                id_produk: id_product,
-                kuantitas: kuantitas
-            });
+            // const addItem = await Transaction_Item.create({
+            //     id_transaction_item : IdItem(id_user, id_product),
+            //     id_transaction: idTransaksi.getDataValue('id_transaction'),
+            //     id_produk: id_product,
+            //     kuantitas: kuantitas
+            // });
 
-            const nowStock = produk.getDataValue('stock') - kuantitas;
+            // const nowStock = produk.getDataValue('stock') - kuantitas;
 
-            const kurangin = await Product.update(
-                {
-                    stock: nowStock,
-                },
-                {
-                    where: {
-                        id_product: id_product,
-                    }
-                }
-            )
+            // const kurangin = await Product.update(
+            //     {
+            //         stock: nowStock,
+            //     },
+            //     {
+            //         where: {
+            //             id_product: id_product,
+            //         }
+            //     }
+            // )
                 res.status(201).json({success: true, msg: "data berhasil masuk"});
-        }
-
-           
+        }       
     
     } catch (error) {
         console.log(error);
@@ -233,6 +295,7 @@ const transaction = async (req,res) => {
     }
 
     }
+
 
 const Destroy = async (req,res) =>{
     try {

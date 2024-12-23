@@ -21,14 +21,14 @@ const Transaction = sequelize.define(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		id_toko:{
-			type: DataTypes.STRING,
-			allowNull: false,
-		},
 		id_voucher:{
 			type: DataTypes.STRING,
 			allowNull: true,
 		},
+		status: {
+			type: DataTypes.ENUM('Selesai', 'Proses'),
+			allowNull: false,
+		}
 	},
 	{ paranoid: true }
 );

@@ -16,7 +16,7 @@ router.get('/Home/:category', ReadByCategory);
 router.post('/Add_Cart/:id_product', AddCart);
 router.post('/Cart', readItem);
 router.post('/Transaksi', mulaitransaksi);
-router.post('/Transaction/:id_product', transaction);
+router.post('/Transaction', transaction);
 router.post('/ExitTransaksi', Destroy); 
 router.post('/CreateToko', BuatToko);
 
