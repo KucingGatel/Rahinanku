@@ -1,0 +1,554 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <!-- Meta Tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="keywords" content="Site keywords here">
+		<meta name="description" content="">
+		<meta name='copyright' content=''>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Title -->
+        <title>Rahinanku</title>
+		
+		<!-- Favicon -->
+        <link rel="icon" href="img/favicon.png">
+		
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!-- Nice Select CSS -->
+		<link rel="stylesheet" href="css/nice-select.css">
+		<!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+		<!-- icofont CSS -->
+        <link rel="stylesheet" href="css/icofont.css">
+		<!-- Slicknav -->
+		<link rel="stylesheet" href="css/slicknav.min.css">
+		<!-- Owl Carousel CSS -->
+        <link rel="stylesheet" href="css/owl-carousel.css">
+		<!-- Datepicker CSS -->
+		<link rel="stylesheet" href="css/datepicker.css">
+		<!-- Animate CSS -->
+        <link rel="stylesheet" href="css/animate.min.css">
+		<!-- Magnific Popup CSS -->
+        <link rel="stylesheet" href="css/magnific-popup.css">
+		
+		<!-- Medipro CSS -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+		
+    </head>
+    <body>
+		<!-- Preloader -->
+        <div class="preloader">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+
+                <div class="indicator"> 
+                    <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <!-- End Preloader -->
+		
+		<my-header></my-header>
+
+        <style>
+        .forgot-pasword {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.forgot-pasword .overlap-wrapper {
+  background-color: #ffffff;
+  overflow: hidden;
+  width: 1546px;
+  height: 779px;
+}
+
+.forgot-pasword .overlap {
+  position: relative;
+  width: 1726px;
+  height: 841px;
+  top: -62px;
+  left: -180px;
+}
+
+.forgot-pasword .group {
+  position: absolute;
+  width: 1726px;
+  height: 841px;
+  top: 0;
+  left: 0;
+}
+
+.forgot-pasword .overlap-group {
+  position: relative;
+  width: 1546px;
+  height: 779px;
+  top: 62px;
+  left: 180px;
+  background-image: url(./img/julia-solonina-csja8o0sbow-unsplash-1.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.forgot-pasword .whatsapp-image {
+  position: absolute;
+  width: 661px;
+  height: 779px;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.forgot-pasword .rectangle {
+  position: absolute;
+  width: 1546px;
+  height: 779px;
+  top: 62px;
+  left: 180px;
+  background-color: var(--black);
+  opacity: 0.8;
+}
+
+.forgot-pasword .login {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 40px 59px;
+  position: absolute;
+  top: 217px;
+  left: 710px;
+  background-color: var(--white);
+  border-radius: 24px;
+  box-shadow: 0px 4px 20px #ffffff40;
+}
+
+.forgot-pasword .frame {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  flex: 0 0 auto;
+  margin-top: -170px;
+}
+
+.forgot-pasword .overlap-group-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.forgot-pasword .div {
+  position: relative;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.forgot-pasword .ellipse {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  left: 0;
+  background-color: var(--orange);
+  border-radius: 25px;
+  opacity: 0.3;
+}
+
+.forgot-pasword .bx-key {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 13px;
+  left: 13px;
+}
+
+.forgot-pasword .text-wrapper {
+  position: relative;
+  width: 277px;
+  font-family: "Open Sans-Bold", Helvetica;
+  text-align: center;
+  font-weight: 700;
+  color: var(--black);
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+}
+
+.forgot-pasword .no-worries-we-ll {
+  position: relative;
+  width: 368px;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--black);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.forgot-pasword .input {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.forgot-pasword .email-address {
+  position: relative;
+  width: fit-content;
+  margin-top: -1.00px;
+  opacity: 0.6;
+  font-family: "Open Sans-SemiBold", Helvetica;
+  font-weight: 600;
+  color: var(--black);
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: normal;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.forgot-pasword .input-2 {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 24px;
+  position: fixed;
+  flex: 0 0 auto;
+  background-color: var(--white);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #33333333;
+  width: 320px;
+  margin-top: 100px;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--black);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.forgot-pasword .input-3 {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 24px;
+  padding-top: 30;
+  position: fixed;
+  flex: 0 0 auto;
+  background-color: var(--white);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #33333333;
+  width: 320px;
+  margin-top: 200px;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--black);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.forgot-pasword .input-4 {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 24px;
+  padding-top: 30;
+  position: fixed;
+  flex: 0 0 auto;
+  background-color: var(--white);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #33333333;
+  width: 320px;
+  margin-top: 400px;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--black);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.forgot-pasword .input-5 {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 24px;
+  padding-top: 30;
+  position: fixed;
+  flex: 0 0 auto;
+  background-color: var(--white);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #33333333;
+  width: 320px;
+  margin-top: -1.00px;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--black);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.forgot-pasword .input-6 {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 24px;
+  padding-top: 30;
+  position: fixed;
+  flex: 0 0 auto;
+  background-color: var(--white);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #33333333;
+  width: 320px;
+  margin-top: -1.00px;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--black);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+
+.forgot-pasword .CTA-buuton-fill {
+  all: unset;
+  box-sizing: border-box;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 24px;
+  background-color: #f98b02;
+  border-radius: 50px;
+  display: inline-flex;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.forgot-pasword .text-wrapper-2 {
+  position: relative;
+  width: 320px;
+  margin-top: -1.00px;
+  font-family: "Open Sans-SemiBold", Helvetica;
+  font-weight: 600;
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.forgot-pasword .CTA-button {
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 0.3;
+  display: inline-flex;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.forgot-pasword .CTA-button-2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.forgot-pasword .bi-arrow-right {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.forgot-pasword .text-wrapper-3 {
+  position: relative;
+  width: fit-content;
+  margin-top: -0.50px;
+  font-family: "Open Sans-SemiBold", Helvetica;
+  font-weight: 600;
+  color: var(--black);
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+
+
+       
+  
+        </style>
+		
+		<div class="forgot-pasword">
+      <div class="overlap-wrapper">
+        <div class="overlap">
+          <div class="group">
+            <!-- <div class="overlap-group">
+              <img
+                class="whatsapp-image"
+                src="img/whatsapp-image-2024-10-14-at-12-44-32-7284a8e6-removebg-preview-2.png"
+              />
+            </div> -->
+          </div>
+          <!-- <div class="rectangle"></div> -->
+          <div class="login">
+            <div class="frame">
+              <div class="overlap-group-wrapper">
+                <!-- <div class="div">
+                  <div class="ellipse"></div>
+                  <img class="bx-key" src="img/Vector.svg" />
+                </div> -->
+              </div>
+              <div class="text-wrapper">Create Shop</div>
+              <!-- <p class="no-worries-we-ll">No worries, we&#39;ll send you reset instructions.</p> -->
+              <form action="">
+                <div class="form-group">
+                  <label for="shop-name">Shop Name</label>
+                  <input
+                    id="shop-name"
+                    class="form-control"
+                    placeholder="Enter your shop name"
+                    type="text"
+                    required
+                    aria-label="Shop Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="street-address">Street Address</label>
+                  <input
+                    id="street-address"
+                    class="form-control"
+                    placeholder="Enter your street address"
+                    type="text"
+                    required
+                    aria-label="Street Address"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="town-city">Town/City</label>
+                  <input
+                    id="town-city"
+                    class="form-control"
+                    placeholder="Enter your town/city"
+                    type="text"
+                    required
+                    aria-label="Town/City"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="phone-number">Phone Number</label>
+                  <input
+                    id="phone-number"
+                    class="form-control"
+                    placeholder="Enter your phone number"
+                    type="tel"
+                    required
+                    aria-label="Phone Number"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email-address">Email Address</label>
+                  <input
+                    id="email-address"
+                    class="form-control"
+                    placeholder="Enter your email address"
+                    type="email"
+                    required
+                    aria-label="Email Address"
+                  />
+                </div>
+                <!-- <button class="btn" onclick="redirectToCheckEmail()"><div class="text-wrapper-2">Create Shop</div></button> -->
+                <button class="btn" onclick="redirectToUpBarang()" type="submit">Create Shop</button>
+              </form>
+              <!-- <button class="btn" onclick="redirectToUpBarang" type="submit">Create Shop</button> -->
+              <!-- <button class="btn" onclick="redirectToCheckEmail()"><div class="text-wrapper-2">Create Shop</div></button> -->
+              <script>
+                function redirectToUpBarang() {
+                  window.location.href = "uploadbarang.html"; 
+                }
+              </script>
+              <div class="CTA-button">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+		<my-footer></my-footer>
+		
+
+
+		<!-- header footer JS -->
+		 <script src="js/headerfooterManage.js"></script>
+		<!-- jquery Min JS -->
+        <script src="js/jquery.min.js"></script>
+		<!-- jquery Migrate JS -->
+		<script src="js/jquery-migrate-3.0.0.js"></script>
+		<!-- jquery Ui JS -->
+		<script src="js/jquery-ui.min.js"></script>
+		<!-- Easing JS -->
+        <script src="js/easing.js"></script>
+		<!-- Color JS -->
+		<script src="js/colors.js"></script>
+		<!-- Popper JS -->
+		<script src="js/popper.min.js"></script>
+		<!-- Bootstrap Datepicker JS -->
+		<script src="js/bootstrap-datepicker.js"></script>
+		<!-- Jquery Nav JS -->
+        <script src="js/jquery.nav.js"></script>
+		<!-- Slicknav JS -->
+		<script src="js/slicknav.min.js"></script>
+		<!-- ScrollUp JS -->
+        <script src="js/jquery.scrollUp.min.js"></script>
+		<!-- Niceselect JS -->
+		<script src="js/niceselect.js"></script>
+		<!-- Tilt Jquery JS -->
+		<script src="js/tilt.jquery.min.js"></script>
+		<!-- Owl Carousel JS -->
+        <script src="js/owl-carousel.js"></script>
+		<!-- counterup JS -->
+		<script src="js/jquery.counterup.min.js"></script>
+		<!-- Steller JS -->
+		<script src="js/steller.js"></script>
+		<!-- Wow JS -->
+		<script src="js/wow.min.js"></script>
+		<!-- Magnific Popup JS -->
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<!-- Counter Up CDN JS -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- Main JS -->
+		<script src="js/main.js"></script>
+    </body>
+</html>
