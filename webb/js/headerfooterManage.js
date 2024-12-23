@@ -50,7 +50,6 @@ class MyHeader extends HTMLElement {
 							<login class="col-lg-2 col-12">
 								<div class="get-quote">
 									<a href="login.html" class="btn">Login</a>
-									<a href="indexLog.html" class="btn">Login</a>
 								</div>
 							</login>
 						</div>

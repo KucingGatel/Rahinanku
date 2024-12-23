@@ -45,19 +45,16 @@
     </head>
     <body>
 		<!-- Preloader -->
-        <div class="preloader">
-            <div class="loader">
-                <div class="loader-outter"></div>
-                <div class="loader-inner"></div>
+    <div class="preloader">
+      <div class="loader">
+          <div class="loader-outter"></div>
+          <div class="loader-inner"></div>
 
-                <div class="indicator"> 
-                    <svg width="16px" height="12px">
-                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
-                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
-                    </svg>
-                </div>
-            </div>
-        </div>
+          <div class="indicator"> 
+            <img src="img/favicon.png">
+          </div>
+      </div>
+  </div>
         <!-- End Preloader -->
 		
 		<my-header></my-header>
@@ -164,13 +161,18 @@
                               <input type="date" id="birthdate" class="form-input" aria-label="Birth Date">
                             </div>
                           </div>
-                        </div>
-                        <div class="button-group">
-                          <button type="button" class="btn btn-cancel">Cancel</button>
-                          <button type="submit" class="btn btn-save">Save Changes</button>
+                          <div style="margin-top: 5%;">
+                            <a href="toko.html">
+                              <h5 style="color: grey;">Make a Store!</h5>
+                            </a>
+                          </div>
                         </div>
                       </form>
                     </div>
+                  </div>
+                  <div style="margin-left: 20%;; margin-top: 5%;">
+                    <button type="button" class="btn btn-cancel">Cancel</button>
+                    <button style="margin-left: 30%;"   type="submit" class="btn btn-save">Save Changes</button>
                   </div>
                 </div>
               </div>
