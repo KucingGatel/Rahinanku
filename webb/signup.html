@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="Site keywords here" />
+    <meta name="description" content="" />
+    <meta name="copyright" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Title -->
+    <title>Sign Up</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="css/nice-select.css" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="css/icofont.css" />
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="css/slicknav.min.css" />
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="css/owl-carousel.css" />
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="css/datepicker.css" />
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" />
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <style>
+      .signup-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 848px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 59px 70px;
+      }
+      .background-image {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .signup-card {
+        position: relative;
+        align-items: start;
+        border-radius: 24px;
+        background: var(--white, #fff);
+        box-shadow: 0px 4px 16.6px 0px rgba(255, 255, 255, 0.25);
+        min-height: 730px;
+        padding: 20px 59px 9px;
+      }
+      .signup-content {
+        display: flex;
+        min-width: 240px;
+        flex-direction: column;
+        align-items: center;
+      }
+      .header-container {
+        display: flex;
+        align-items: center;
+        gap: 40px 100px;
+        color: var(--black, #333);
+        font: 700 32px Plus Jakarta Sans, sans-serif;
+      }
+      .header-title {
+        align-self: stretch;
+        margin: auto 0;
+      }
+      .close-icon {
+        aspect-ratio: 1;
+        object-fit: contain;
+        width: 24px;
+        align-self: stretch;
+        margin: auto 0;
+      }
+      .form-container {
+        display: flex;
+        margin-top: 20px;
+        width: 100%;
+        max-width: 368px;
+        flex-direction: column;
+      }
+      .input-group {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        font-family: Plus Jakarta Sans, sans-serif;
+        color: var(--black, #333);
+        margin-bottom: 10px;
+      }
+      .input-label {
+        font-size: 18px;
+        font-weight: 600;
+        opacity: 0.6;
+      }
+      .input-field {
+        border-radius: 8px;
+        border: 1px solid rgba(51, 51, 51, 0.2);
+        background: var(--white, #fff);
+        padding: 15px;
+        width: 100%;
+        font-size: 16px;
+      }
+      .password-field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .visibility-icon {
+        aspect-ratio: 1;
+        width: 24px;
+        object-fit: contain;
+      }
+      .terms-container {
+        display: flex;
+        align-items: start;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .checkbox-wrapper {
+        border-radius: 4px;
+        border: 1px solid rgba(51, 51, 51, 0.2);
+        height: 18px;
+        width: 18px;
+      }
+      .terms-text {
+        color: rgba(51, 51, 51, 0.6);
+        font: 400 14px Plus Jakarta Sans, sans-serif;
+      }
+
+      .highlight-text {
+        color: rgba(250, 139, 2, 1);
+      }
+      .action-container {
+        display: flex;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 368px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .signup-button {
+        width: 100%;
+        border-radius: 50px;
+        background-color: rgba(250, 139, 2, 1);
+        color: var(--white, #fff);
+        font: 600 20px Plus Jakarta Sans, sans-serif;
+        padding: 10px 24px;
+        border: none;
+        cursor: pointer;
+      }
+      .divider {
+        font: 400 16px Plus Jakarta Sans, sans-serif;
+        opacity: 0.4;
+        margin: 6px 0;
+      }
+      .google-button {
+        width: 100%;
+        border-radius: 50px;
+        border: 1px solid rgba(51, 51, 51, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px 24px;
+        font: 600 18px Plus Jakarta Sans, sans-serif;
+        cursor: pointer;
+      }
+      .login-text {
+        color: var(--black, #333);
+        margin-top: 20px;
+        font: 500 16px Plus Jakarta Sans, sans-serif;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+      @media (max-width: 991px) {
+        .signup-container {
+          max-width: 100%;
+          padding: 0 20px;
+        }
+        .signup-card {
+          padding: 0 20px;
+        }
+        .input-field,
+        .signup-button,
+        .google-button {
+          padding: 0 20px;
+        }
+      }
+    </style>
+
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="loader">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+
+        <div class="indicator">
+          <svg width="16px" height="12px">
+            <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <!-- End Preloader -->
+
+    <div class="signup-container">
+      <img src="https://cdn.builder.io/api/v1/image/assets/f632c1b4c65d4af299059ec99b62b89b/9eaba87385a2796393e161b26dbcee3dafda6155d61bbe3ab868a567a62e097d?apiKey=f632c1b4c65d4af299059ec99b62b89b&" alt="" class="background-image" />
+      <div class="signup-card">
+        <div class="signup-content" style="margin: 25px">
+          <div class="header-container">
+            <h1 class="header-title" style="margin-bottom: 20px">Create Account</h1>
+          </div>
+
+          <form class="form-container">
+            <div class="input-group">
+              <label for="fullName" class="input-label">Full Name</label>
+              <div class="input-field password-field">
+                <input type="text" id="fullName" class="input-field" placeholder="Enter your full name" required aria-required="true" style="border: none" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="email" class="input-label">Email Address</label>
+              <div class="input-field password-field">
+                <input type="email" id="email" class="input-field" placeholder="Enter your email address" required aria-required="true" style="border: none" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="password" class="input-label">Password</label>
+              <div class="input-field password-field">
+                <input type="password" id="password" class="password" placeholder="Enter your password" required aria-required="true" style="border: none" />
+                <!--  -->
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="Password" class="input-label">Confirm Password</label>
+              <div class="input-field password-field">
+                <input type="password" id="confirmPassword" placeholder="Confirm your password" required aria-required="true" style="border: none" />
+              </div>
+            </div>
+
+            <div class="terms-container">
+              <input type="checkbox" id="terms" class="" />
+              <p class="terms-text">I agree with <a class="highlight-text" href="index.html" style="color: rgba(250, 139, 2, 1)">Terms</a> and <a class="highlight-text" style="color: rgba(250, 139, 2, 1)">Privacy</a></p>
+            </div>
+
+            <div class="action-container">
+              <button type="submit" href="indexLog.html" class="signup-button">Sign Up</button>
+              <span class="divider" style="margin: 15px 0">or</span>
+              <button type="button" class="google-button">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/f632c1b4c65d4af299059ec99b62b89b/f30c74b7770bc50980741aefa466ac6b9e81923afed63f3dbc2fb21e7273a122?apiKey=f632c1b4c65d4af299059ec99b62b89b&"
+                  alt="Google logo"
+                  class="visibility-icon"
+                />
+                <span>Sign Up with Google</span>
+              </button>
+              <p class="login-text">Already have an account? <a class="highlight-text" href="login.html">Log In</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- login -->
+    <script src="js/headerfooterManage.js"></script>
+    <!-- jquery Min JS -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jquery Migrate JS -->
+    <script src="js/jquery-migrate-3.0.0.js"></script>
+    <!-- jquery Ui JS -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- Easing JS -->
+    <script src="js/easing.js"></script>
+    <!-- Color JS -->
+    <script src="js/colors.js"></script>
+    <!-- Popper JS -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="js/bootstrap-datepicker.js"></script>
+    <!-- Jquery Nav JS -->
+    <script src="js/jquery.nav.js"></script>
+    <!-- Slicknav JS -->
+    <script src="js/slicknav.min.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- Niceselect JS -->
+    <script src="js/niceselect.js"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="js/tilt.jquery.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="js/owl-carousel.js"></script>
+    <!-- counterup JS -->
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Steller JS -->
+    <script src="js/steller.js"></script>
+    <!-- Wow JS -->
+    <script src="js/wow.min.js"></script>
+    <!-- Magnific Popup JS -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+    <script>
+      function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        const toggleButton = field.nextElementSibling;
+        if (field.type === "password") {
+          field.type = "text";
+          toggleButton.textContent = "Hide";
+        } else {
+          field.type = "password";
+          toggleButton.textContent = "Show";
+        }
+      }
+    </script>
+  </body>
+</html>

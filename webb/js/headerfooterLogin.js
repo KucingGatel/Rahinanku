@@ -24,21 +24,18 @@ class MyHeader extends HTMLElement {
 								<div class="main-menu">
 									<nav class="navigation">
 										<ul class="nav menu">
-											<li class="active"><a href="index.html">Home</a></li>
 											<li><a href="product.html">Product </a></li>
-											<li><a href="#">Services </a></li>
 											<li><a href="#">Category <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
-													<li><a href="404.html">404 Error</a></li>
+													<li><a href="404.html">Nganten</a></li>
+													<li><a href="404.html">Odalan</a></li>
+													<li><a href="404.html">Rahinan</a></li>
+													<li><a href="404.html">Otonanan</a></li>
+													<li><a href="404.html">Ngaben</a></li>
 												</ul>
 											</li>
-											<li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="blog-single.html">Blog Details</a></li>
-													<li><a href="blog-single.html">Details</a></li>
-												</ul>
+											<li><a href="404.html">Blogs</a>
 											</li>
-											<li><a href="contact.html">Contact Us</a></li>
 										</ul>
 									</nav>
 								</div>
@@ -49,12 +46,12 @@ class MyHeader extends HTMLElement {
 									<div class="get-quotelog">
 										<div class="nav menu">
 											<li class="btnlog">
-												<a href="#"><i class="icofont icofont-user-alt-3"></i></a>
+											<a href="#"><i class="icofont icofont-user-alt-3"></i></a>
 												<ul class="dropdown">
-													<li><a href="#">your profile</a>
+													<li><a href="profile.html">your profile</a>
 													<li><a href="cart.html">Cart</a>
 													<li><a href="wishlist.html">wishlist</a>
-													<li><a href="wishlist.html">Logout</a>
+													<li><a href="index.html">Logout</a>
 												</ul>
 											</li>
 										</div>
@@ -67,7 +64,7 @@ class MyHeader extends HTMLElement {
 			</div>
 			<!--/ End Header Inner -->
 		</header>
-		<!-- End Header Area -->
+		<!-- End Header Area -->	
     `
     }
 }

@@ -24,20 +24,18 @@ class MyHeader extends HTMLElement {
 								<div class="main-menu">
 									<nav class="navigation">
 										<ul class="nav menu">
-											<li class="active"><a href="index.html">Home</a></li>
 											<li><a href="product.html">Product </a></li>
-											<li><a href="#">Services </a></li>
 											<li><a href="#">Category <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
-													<li><a href="404.html">404 Error</a></li>
+													<li><a href="404.html">Nganten</a></li>
+													<li><a href="404.html">Odalan</a></li>
+													<li><a href="404.html">Rahinan</a></li>
+													<li><a href="404.html">Otonanan</a></li>
+													<li><a href="404.html">Ngaben</a></li>
 												</ul>
 											</li>
-											<li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="blog-single.html">Blog Details</a></li>
-												</ul>
+											<li><a href="artikel.html">Blogs</a>
 											</li>
-											<li><a href="contact.html">Contact Us</a></li>
 										</ul>
 									</nav>
 								</div>
@@ -45,7 +43,7 @@ class MyHeader extends HTMLElement {
 							</div>
 							<login class="col-lg-2 col-12">
 								<div class="get-quote">
-									<a href="appointment.html" class="btn">Login</a>
+									<a href="indexLog.html" class="btn">Login</a>
 								</div>
 							</login>
 						</div>

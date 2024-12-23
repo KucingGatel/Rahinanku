@@ -59,59 +59,7 @@
         </div>
         <!-- End Preloader -->
 
-        <!-- Header Area -->
-		<header class="header" >
-			<!-- Header Inner -->
-			<div class="header-inner">
-				<div class="container">
-					<div class="inner">
-						<div class="row">
-							<div class="col-lg-3 col-md-3 col-12">
-								<!-- Start Logo -->
-								<div class="logo">
-									<a href="index.html"><img src="img/favicon.png" width="20%" alt="#"></a>
-								</div>
-								<!-- End Logo -->
-								<!-- Mobile Nav -->
-								<div class="mobile-nav"></div>
-								<!-- End Mobile Nav -->
-							</div>
-							<div class="col-lg-7 col-md-9 col-12">
-								<!-- Main Menu -->
-								<div class="main-menu">
-									<nav class="navigation">
-										<ul class="nav menu">
-											<li><a href="index.html">Home</a></li>
-                                            <li class="active"><a href="#">Product</a></li>
-											<li><a href="#">Services</a></li>
-											<li><a href="#">Category<i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="404.html">404 Error</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="blog-single.html">Blog Details</a></li>
-												</ul>
-											</li>
-											<li><a href="contact.html">Contact Us</a></li>
-										</ul>
-									</nav>
-								</div>
-								<!--/ End Main Menu -->
-							</div>
-							<div class="col-lg-2 col-12">
-								<div class="get-quote">
-									<a href="appointment.html" class="btn">Login</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--/ End Header Inner -->
-		</header>
-		<!-- End Header Area -->
+        <my-header></my-header>
 
         <!-- Start Call to action -->
 		<section class="call-action overlay" data-stellar-background-ratio="0.5">
@@ -158,16 +106,54 @@
 					<h2>Our <span>Recomendation</span></h2>
 					<p>This is our product Recomendation for today!!</p>
 				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-4 col-lg-4">
+				<div id="product-list" class="row">
+				<Script>
+					const apiUrl = 'http://localhost:3000/api/user/Home'; // Ganti dengan URL API kamu
+
+// Fungsi untuk mengambil data dari API
+async function fetchProducts() {
+// console.log("KONTOLLLLLLLLLLLLLLLLLLLLLLL");
+
+try {
+	const response = await fetch(apiUrl, {
+		mode: 'cors',
+	}); // Mengambil data dari API
+	// console.log(response);
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	}
+	const data = await response.json(); // Konversi ke JSON
+	console.log(data);
+	if (data.success) {
+		displayProducts(data.data); // Tampilkan data produk
+	} else {
+		console.error('Gagal mendapatkan data produk:', data.message);
+	}
+} catch (error) {
+	console.error('Error saat mengambil data dari API:', error);
+}
+}
+
+// Fungsi untuk menampilkan produk di halaman
+function displayProducts(products) {
+console.log(products);
+const productList = document.getElementById('product-list');
+
+products.forEach(product => {
+	console.log(product);
+	const productHTML = `
+		<div class="col-sm-6 col-md-4 col-lg-4">
 					   <div class="box">
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
 								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -176,221 +162,33 @@
 						  </div>
 						  <div class="detail-box">
 							 <h5>
-								Canang
+								${product.nama_product}
 							 </h5>
 							 <h6>
-								$75
+								${product.harga}
 							 </h6>
 						  </div>
 					   </div>
 					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$80
-							 </h6>
-						  </div>
-					   </div>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$68
-							 </h6>
-						  </div>
-					   </div>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$70
-							 </h6>
-						  </div>
-					   </div>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$75
-							 </h6>
-						  </div>
-					   </div>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$58
-							 </h6>
-						  </div>
-						</div>
-					</div>                             
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$70
-							 </h6>
-						  </div>
-					   </div>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$75
-							 </h6>
-						  </div>
-					   </div>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$58
-							 </h6>
-						  </div>
-						</div>
-					</div>                             
+	`;
+	console.log('Sebelum:', productList.innerHTML);
+productList.innerHTML += productHTML;
+console.log('Sesudah:', productList.innerHTML);
+	// productList.innerHTML += productHTML;
+});
+}
+
+// Panggil fungsi fetchProducts saat halaman dimuat
+// console.log('Data Produk:', products);
+(async() => {
+await fetchProducts()  
+})()
+				</Script>
 				</div>
 				<div class="button">
 					<a href="#" class="btn">See More</a>
 				</div>
-			</div>
 		</section>
-		<!--/ End Why choose -->
 
         <!-- Start Call to action -->
 		<section class="call-action overlay" data-stellar-background-ratio="0.5">
@@ -425,8 +223,11 @@
 								<a href="" class="option1">
 								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -438,7 +239,7 @@
 								Canang
 							 </h5>
 							 <h6>
-								$75
+								Rp. 5,000
 							 </h6>
 						  </div>
 					   </div>
@@ -448,10 +249,13 @@
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
-								Add To Cart
+								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -463,7 +267,7 @@
 								Canang
 							 </h5>
 							 <h6>
-								$80
+								Rp. 5,000
 							 </h6>
 						  </div>
 					   </div>
@@ -473,10 +277,13 @@
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
-								Add To Cart
+								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -488,7 +295,7 @@
 								Canang
 							 </h5>
 							 <h6>
-								$68
+								Rp. 5,000
 							 </h6>
 						  </div>
 					   </div>
@@ -498,10 +305,13 @@
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
-								Add To Cart
+								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -513,7 +323,7 @@
 								Canang
 							 </h5>
 							 <h6>
-								$70
+								Rp. 5,000
 							 </h6>
 						  </div>
 					   </div>
@@ -523,10 +333,13 @@
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
-								Add To Cart
+								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -538,7 +351,7 @@
 								Canang
 							 </h5>
 							 <h6>
-								$75
+								Rp. 5,000
 							 </h6>
 						  </div>
 					   </div>
@@ -548,10 +361,13 @@
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
-								Add To Cart
+								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -563,32 +379,7 @@
 								Canang
 							 </h5>
 							 <h6>
-								$58
-							 </h6>
-						  </div>
-						</div>
-					</div>                             
-					<div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart
-								</a>
-								<a href="" class="option2">
-								Buy Now
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								$70
+								Rp. 5,000
 							 </h6>
 						  </div>
 					   </div>
@@ -598,10 +389,13 @@
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
-								Add To Cart
+								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -613,7 +407,7 @@
 								Canang
 							 </h5>
 							 <h6>
-								$75
+								Rp. 5,000
 							 </h6>
 						  </div>
 					   </div>
@@ -623,10 +417,13 @@
 						  <div class="option_container">
 							 <div class="options">
 								<a href="" class="option1">
-								Add To Cart
+								Add To Cart 
 								</a>
-								<a href="" class="option2">
+								<a href="" class="option3">
 								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
 								</a>
 							 </div>
 						  </div>
@@ -638,16 +435,43 @@
 								Canang
 							 </h5>
 							 <h6>
-								$58
+								Rp. 5,000
 							 </h6>
 						  </div>
-						</div>
-					</div>                             
+					   </div>
+					</div>
+					<div class="col-sm-6 col-md-4 col-lg-4">
+					   <div class="box">
+						  <div class="option_container">
+							 <div class="options">
+								<a href="" class="option1">
+								Add To Cart 
+								</a>
+								<a href="" class="option3">
+								Buy Now
+								</a>
+								<a href="productDetail.html" class="option2">
+								Look More
+								</a>
+							 </div>
+						  </div>
+						  <div class="img-box">
+							 <img src="img/canang.png" alt="">
+						  </div>
+						  <div class="detail-box">
+							 <h5>
+								Canang
+							 </h5>
+							 <h6>
+								Rp. 5,000
+							 </h6>
+						  </div>
+					   </div>
+					</div>
 				</div>
 				<div class="button">
 					<a href="#" class="btn">See More</a>
 				</div>
-			</div>
 		</section>
 		<!--/ End Why choose -->
         
@@ -729,6 +553,8 @@
 		</footer>
 		<!--/ End Footer Area -->
 		
+		<!-- header footer JS -->
+		 <script src="js/headerfooterManage.js"></script>
 		<!-- jquery Min JS -->
         <script src="js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->

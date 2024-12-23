@@ -1,0 +1,723 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <!-- Meta Tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="keywords" content="Site keywords here">
+		<meta name="description" content="">
+		<meta name='copyright' content=''>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Title -->
+        <title>Rahinanku</title>
+		
+		<!-- Favicon -->
+        <link rel="icon" href="img/favicon.png">
+		
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!-- Nice Select CSS -->
+		<link rel="stylesheet" href="css/nice-select.css">
+		<!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+		<!-- icofont CSS -->
+        <link rel="stylesheet" href="css/icofont.css">
+		<!-- Slicknav -->
+		<link rel="stylesheet" href="css/slicknav.min.css">
+		<!-- Owl Carousel CSS -->
+        <link rel="stylesheet" href="css/owl-carousel.css">
+		<!-- Datepicker CSS -->
+		<link rel="stylesheet" href="css/datepicker.css">
+		<!-- Animate CSS -->
+        <link rel="stylesheet" href="css/animate.min.css">
+		<!-- Magnific Popup CSS -->
+        <link rel="stylesheet" href="css/magnific-popup.css">
+		
+		<!-- Medipro CSS -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+		
+    </head>
+    <body>
+		<!-- Preloader -->
+        <div class="preloader">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+
+                <div class="indicator"> 
+                    <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <!-- End Preloader -->
+		
+		<my-header></my-header>
+
+        <style>
+        .check-out {
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .check-out .group-wrapper {
+            background-color: var(--bg);
+            width: 1440px;
+            height: 1024px;
+        }
+        
+        .check-out .group {
+            position: relative;
+            width: 1170px;
+            height: 892px;
+            top: 66px;
+            left: 135px;
+        }
+        
+        .check-out .frame {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .check-out .text-wrapper {
+            position: relative;
+            width: fit-content;
+            margin-top: -1.00px;
+            font-family: var(--heading-36px-medium-font-family);
+            font-weight: var(--heading-36px-medium-font-weight);
+            color: var(--text-2);
+            font-size: var(--heading-36px-medium-font-size);
+            letter-spacing: var(--heading-36px-medium-letter-spacing);
+            line-height: var(--heading-36px-medium-line-height);
+            white-space: nowrap;
+            font-style: var(--heading-36px-medium-font-style);
+        }
+        
+        .check-out .prame {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            position: absolute;
+            top: 78px;
+            left: 0;
+        }
+        
+        .check-out .frame-2 {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 32px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .frame-3 {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .prame-2 {
+            position: relative;
+            width: fit-content;
+            margin-top: -1.00px;
+            opacity: 0.4;
+            font-family: var(--title-16px-regular-font-family);
+            font-weight: var(--title-16px-regular-font-weight);
+            color: var(--text-2);
+            font-size: var(--title-16px-regular-font-size);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            white-space: nowrap;
+            font-style: var(--title-16px-regular-font-style);
+        }
+        
+        .check-out .span {
+            color: #000000;
+            font-family: var(--title-16px-regular-font-family);
+            font-style: var(--title-16px-regular-font-style);
+            font-weight: var(--title-16px-regular-font-weight);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            font-size: var(--title-16px-regular-font-size);
+        }
+        
+        .check-out .text-wrapper-2 {
+            color: #521301;
+            font-family: var(--title-16px-regular-font-family);
+            font-style: var(--title-16px-regular-font-style);
+            font-weight: var(--title-16px-regular-font-weight);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            font-size: var(--title-16px-regular-font-size);
+        }
+        
+        .check-out .frame-4 {
+            position: relative;
+            width: 470px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+       
+        
+        .check-out .frame-5 {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 16px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .icon-checkbox {
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .check-out .text3 {
+            position: relative;
+            width: fit-content;
+            left: -5px;
+            margin-top: -1.00px;
+            font-family: var(--title-16px-regular-font-family);
+            font-weight: var(--title-16px-regular-font-weight);
+            color: #000000;
+            font-size: var(--title-16px-regular-font-size);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            white-space: nowrap;
+            font-style: var(--title-16px-regular-font-style);
+        }
+
+        .check-out .text2 {
+            position: relative;
+            width: fit-content;
+            left: -7px;
+            margin-top: -1.00px;
+            font-family: var(--title-16px-regular-font-family);
+            font-weight: var(--title-16px-regular-font-weight);
+            color: #000000;
+            font-size: var(--title-16px-regular-font-size);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            white-space: nowrap;
+            font-style: var(--title-16px-regular-font-style);
+        }
+        
+        .check-out .frame-6 {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 32px;
+            position: absolute;
+            top: 110px;
+            left: 643px;
+        }
+        
+        .check-out .frame-7 {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 32px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .frame-8 {
+            display: flex;
+            width: 385px;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .img-wrapper {
+            position: relative;
+            width: 54px;
+            height: 54px;
+        }
+        
+        .check-out .g-x {
+            position: absolute;
+            width: 49px;
+            height: 42px;
+            top: 6px;
+            left: 3px;
+        }
+        
+        .check-out .frame-9 {
+            display: inline-flex;
+            align-items: center;
+            gap: 210px;
+            position: relative;
+            flex: 0 0 auto;
+            margin-right: -10.00px;
+        }
+        
+        .check-out .text4 {
+            position: relative;
+            width: fit-content;
+            margin-top: -1.00px;
+            left: 6px;
+            font-family: var(--title-16px-regular-font-family);
+            font-weight: var(--title-16px-regular-font-weight);
+            color: var(--text-2);
+            font-size: var(--title-16px-regular-font-size);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            white-space: nowrap;
+            font-style: var(--title-16px-regular-font-style);
+        }
+
+        .check-out .text1 {
+            position: relative;
+            width: fit-content;
+            left: 0px;
+            margin-top: -1.00px;
+            font-family: var(--title-16px-regular-font-family);
+            font-weight: var(--title-16px-regular-font-weight);
+            color: var(--text-2);
+            font-size: var(--title-16px-regular-font-size);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            white-space: nowrap;
+            font-style: var(--title-16px-regular-font-style);
+        }
+        
+        .check-out .frame-10 {
+            display: flex;
+            width: 385px;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .gcq-x {
+            position: absolute;
+            width: 50px;
+            height: 39px;
+            top: 8px;
+            left: 2px;
+        }
+        
+        .check-out .frame-11 {
+            display: inline-flex;
+            align-items: center;
+            gap: 204px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .frame-12 {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .frame-13 {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 307px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .under-line {
+            position: relative;
+            width: 422px;
+            height: 1px;
+            opacity: 0.4;
+            background-image: url(./img/image.svg);
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+        
+        .check-out .frame-14 {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 314px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .under-line-2 {
+            position: relative;
+            width: 422px;
+            height: 1px;
+            opacity: 0.4;
+            background-image: url(./img/line-1.svg);
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+        
+        .check-out .frame-15 {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 335px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .frame-16 {
+            display: inline-flex;
+            align-items: center;
+            gap: 155px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-family: var(--title-16px-regular-font-family);
+            font-size: 16px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            }
+
+            /* Hide the browser's default radio button */
+            .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            }
+
+            /* Create a custom radio button */
+            .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border-radius: 50%;
+            }
+
+            /* On mouse-over, add a grey background color */
+            .container:hover input ~ .checkmark {
+            background-color: #ccc;
+            }
+
+            /* When the radio button is checked, add a blue background */
+            .container input:checked ~ .checkmark {
+            background-color: #d78c2d;
+            }
+
+        
+        .check-out .frame-17 {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 8px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .image-wrapper {
+            position: relative;
+            width: 42px;
+            height: 28px;
+        }
+        
+        .check-out .image {
+            position: absolute;
+            width: 38px;
+            height: 17px;
+            top: 6px;
+            left: 2px;
+        }
+        
+        .check-out .img {
+            position: absolute;
+            width: 38px;
+            height: 11px;
+            top: 8px;
+            left: 2px;
+        }
+        
+        .check-out .image-2 {
+            position: absolute;
+            width: 39px;
+            height: 25px;
+            top: 1px;
+            left: 1px;
+        }
+        
+        .check-out .image-3 {
+            position: absolute;
+            width: 39px;
+            height: 18px;
+            top: 5px;
+            left: 1px;
+        }
+        
+        .check-out .ellipse {
+            position: relative;
+            width: 14px;
+            height: 14px;
+            top: 4px;
+            left: 4px;
+            background-color: var(--button);
+            border-radius: 7px;
+        }
+        
+        .check-out .coupon-code {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 16px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+        
+        .check-out .prame-wrapper {
+            position: relative;
+            width: 300px;
+            height: 56px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid;
+            border-color: #000000;
+        }
+        
+        .check-out .text-wrapper-5 {
+            position: absolute;
+            top: 15px;
+            left: 24px;
+            opacity: 0.5;
+            font-family: var(--title-16px-regular-font-family);
+            font-weight: var(--title-16px-regular-font-weight);
+            color: var(--text-2);
+            font-size: var(--title-16px-regular-font-size);
+            letter-spacing: var(--title-16px-regular-letter-spacing);
+            line-height: var(--title-16px-regular-line-height);
+            white-space: nowrap;
+            font-style: var(--title-16px-regular-font-style);
+        }
+        
+        .check-out{
+            all: unset;
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0px 48px;
+            padding-bottom: 90px;
+            position: relative;
+            flex: 0 0 auto;
+            border-radius: 4px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            display: inline-block;
+        }
+
+        .luas {
+            padding: 15px 90px;
+        }
+        
+        .check-out .view-all-products {
+            position: relative;
+            width: fit-content;
+            margin-top: -1.00px;
+            font-family: var(--title-16px-medium-font-family);
+            font-weight: var(--title-16px-medium-font-weight);
+            color: var(--text);
+            font-size: var(--title-16px-medium-font-size);
+            letter-spacing: var(--title-16px-medium-letter-spacing);
+            line-height: var(--title-16px-medium-line-height);
+            white-space: nowrap;
+            font-style: var(--title-16px-medium-font-style);
+        }
+
+        </style>
+		
+		<div class="check-out">
+            <div class="group-wrapper">
+              <div class="group">
+                <div class="frame"><div class="text-wrapper">Product Details</div></div>
+                <div class="prame">
+                  <div class="frame-2">
+                    <div class="frame-3">
+                      <label for="fname">First Name</label>
+                      <input type="text" id="fname" name="firstname"> 
+                    </div>
+                    <div class="frame-3">
+                      <label for="fname">Company Name</label>
+                      <input class="luas" type="text" id="fname" name="firstname"> 
+                    </div>
+                    <div class="frame-3">
+                      <label for="fname">Street Address</label>
+                      <input class="luas" type="text" id="fname" name="firstname"> 
+                    </div>
+                    <div class="frame-3">
+                      <label for="fname">Apartment, floor, etc. (optional)</label>
+                      <input class="luas" type="text" id="fname" name="firstname"> 
+                    </div>
+                    <div class="frame-3">
+                      <label for="fname">Town/City*</label>
+                      <input class="luas"  type="text" id="fname" name="firstname"> 
+                    </div>
+                    <div class="frame-3">
+                      <label for="fname">Phone Number*</label>
+                      <input class="luas"  type="text" id="fname" name="firstname"> 
+                    </div>
+                    <div class="frame-3">
+                      <label for="fname">Email Address*</label>
+                      <input class="luas" type="text" id="fname" name="firstname"> 
+                    </div>
+                  </div>
+                  <form action="/action_page.php">
+                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                    <label for="vehicle1">Save this information for faster check-out next time</label><br>
+                  </form>
+                </div>
+                <div class="frame-6">
+                  <div class="frame-7">
+                    <div class="frame-8">
+                      <div class="img-wrapper"><img class="g-x" src="img/canang.png" /></div>
+                      <div class="frame-9">
+                        <div class="text2">Canang</div>
+                        <div class="text1">Rp. 10.000</div>
+                      </div>
+                    </div>
+                    <div class="frame-10">
+                      <div class="img-wrapper"><img class="gcq-x" src="img/canang.png" /></div>
+                      <div class="frame-11">
+                        <div class="text3">Canang</div>
+                        <div class="text4">Rp. 5.000</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="frame-12">
+                    <div class="frame-12">
+                      <div class="frame-12">
+                        <div class="frame-12">
+                          <div class="frame-13">
+                            <div class="text-wrapper-4">Subtotal:</div>
+                            <div class="text-wrapper-4">Rp. 15.000</div>
+                          </div>
+                          <div class="under-line"></div>
+                        </div>
+                        <div class="frame-14">
+                          <div class="text-wrapper-4">Shipping:</div>
+                          <div class="text-wrapper-4">Free</div>
+                        </div>
+                      </div>
+                      <div class="under-line-2"></div>
+                    </div>
+                    <div class="frame-15">
+                      <div class="text-wrapper-4">Total:</div>
+                      <div class="text-wrapper-4">Rp. 15.000</div>
+                    </div>
+                  </div>
+                  <div class="frame-16">
+                    <label class="container">Bank
+                        <input type="radio" checked="checked" name="radio">
+                        <span class="checkmark"></span>
+                      </label>
+                    <div class="frame-17">
+                      <div class="image-wrapper"><img class="image" src="img/image 32.svg" /></div>
+                      <div class="image-wrapper"><img class="img" src="img/image 30.svg" /></div>
+                      <div class="image-wrapper"><img class="image-2" src="img/image 31.svg" /></div>
+                      <div class="image-wrapper"><img class="image-3" src="img/image 33.svg" /></div>
+                    </div>
+                  </div>
+                  <div class="frame-5">
+                    <label class="container">Cash on Delivery
+                        <input type="radio" checked="checked" name="radio">
+                        <span class="checkmark"></span>
+                  </div>
+                  <div class="coupon-code">
+                    <form>
+                      <input type="text" name="coupon" placeholder="Coupon Code" />
+                    </form>
+                    
+                    <div class="btn"><div class="view-all-products">Apply Coupon</div></div>
+                
+                  </div>
+                  <div class="btn"><div class="view-all-products">Place Order</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+		
+		<my-footer></my-footer>
+		
+
+
+		<!-- header footer JS -->
+		 <script src="js/headerfooterLogin.js"></script>
+		<!-- jquery Min JS -->
+        <script src="js/jquery.min.js"></script>
+		<!-- jquery Migrate JS -->
+		<script src="js/jquery-migrate-3.0.0.js"></script>
+		<!-- jquery Ui JS -->
+		<script src="js/jquery-ui.min.js"></script>
+		<!-- Easing JS -->
+        <script src="js/easing.js"></script>
+		<!-- Color JS -->
+		<script src="js/colors.js"></script>
+		<!-- Popper JS -->
+		<script src="js/popper.min.js"></script>
+		<!-- Bootstrap Datepicker JS -->
+		<script src="js/bootstrap-datepicker.js"></script>
+		<!-- Jquery Nav JS -->
+        <script src="js/jquery.nav.js"></script>
+		<!-- Slicknav JS -->
+		<script src="js/slicknav.min.js"></script>
+		<!-- ScrollUp JS -->
+        <script src="js/jquery.scrollUp.min.js"></script>
+		<!-- Niceselect JS -->
+		<script src="js/niceselect.js"></script>
+		<!-- Tilt Jquery JS -->
+		<script src="js/tilt.jquery.min.js"></script>
+		<!-- Owl Carousel JS -->
+        <script src="js/owl-carousel.js"></script>
+		<!-- counterup JS -->
+		<script src="js/jquery.counterup.min.js"></script>
+		<!-- Steller JS -->
+		<script src="js/steller.js"></script>
+		<!-- Wow JS -->
+		<script src="js/wow.min.js"></script>
+		<!-- Magnific Popup JS -->
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<!-- Counter Up CDN JS -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- Main JS -->
+		<script src="js/main.js"></script>
+    </body>
+</html>
