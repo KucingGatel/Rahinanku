@@ -37,6 +37,14 @@ const Toko = sequelize.define(
         account_id:{
             type:DataTypes.STRING,
             allowNull: false
+        },
+        kota:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        status:{
+            type: DataTypes.ENUM('Terkonfirmasi', 'Pending', 'Tidak Dikonfirmasi'),
+            allowNull: false
         }
 	},
 	{ paranoid: true }
