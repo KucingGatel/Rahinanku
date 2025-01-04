@@ -1,3 +1,61 @@
+<Script>
+  const url = new URL(window.location.href);
+
+const idProduk = url.searchParams.get("id_produk");
+
+if (idProduk != null) {
+  // console.log("ID Produk:", idProduk);  
+  // console.log(JSON.parse(localStorage.getItem('userData')).account_id);
+  // Data yang akan dikirim ke API
+const requestData = {
+    id_user: JSON.parse(localStorage.getItem('userData')).account_id, // Ganti dengan ID user sesuai kebutuhan
+    id_produk: idProduk // Ganti dengan ID produk sesuai kebutuhan
+};
+const userData = JSON.parse(localStorage.getItem('userData'));
+if (!userData || !userData.account_id) {
+    alert('User tidak ditemukan, silakan login terlebih dahulu.');
+    window.location.href = 'login.html';
+}
+
+// Fungsi untuk memanggil API
+async function addCart() {
+    try {
+        const response = await fetch("http://localhost:3000/api/user/Add_Cart", {
+            method: "POST", // Metode POST sesuai dengan API Anda
+            headers: {
+                "Content-Type": "application/json", // Header untuk JSON
+            },
+            body: JSON.stringify(requestData), // Konversi data menjadi JSON
+        });
+
+        if (response.ok) {
+            const result = await response.json(); // Parsing respons JSON
+            // console.log("Response:", result);
+            // Ambil URL saat ini
+const url = new URL(window.location.href);
+
+// Hapus query string
+url.search = "";
+
+// Perbarui URL di browser tanpa reload halaman
+window.history.pushState({}, "", url);
+
+console.log("URL setelah query string dihapus:", url.href);
+
+        } else {
+            console.error("Error:", response.status, await response.json());
+        }
+    } catch (error) {
+        console.error("Fetch Error:", error);
+    }
+}
+
+// Panggil fungsi untuk memanggil API
+addCart();
+
+}
+
+</Script>
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -56,7 +114,18 @@
       </div>
   </div>
         <!-- End Preloader -->
-		
+				<script>
+          const script = document.createElement('script'); // Membuat elemen <script> baru
+          
+          if (userData && userData.account_id != null) {
+            script.src = "js/headerfooterLogin.js";
+            console.log("kontol")
+          } else {
+            script.src = "js/headerfooterManage.js";
+          }
+          
+          document.head.appendChild(script); // Menyisipkan script ke dalam <head>
+        </script>
 		<my-header></my-header>
 
         <style>
@@ -630,18 +699,57 @@ counter-container {
         console.error('Gagal mengambil data:', error);
     }
 }
-console.log(total);
+// console.log(total);
+// function renderCartItems(items) {
+//     itemList.innerHTML = ''; // Pastikan itemList ada
+//     if (items.length === 0) {
+//         itemList.innerHTML = '<p>Keranjang kosong</p>';
+//         return;
+//     }else{
+//     items.forEach(item => {
+//         const itemDiv = document.createElement('div');
+//         itemDiv.classList.add('cart-item');
+//         total = total + (item.kuantitas * item.harga);
+//         itemDiv.innerHTML = `
+//                 <div class="element">${item.harga / item.kuantitas}</div>
+//                 <div class="element-2">${item.harga}</div>
+//                 <div class="quantity">
+//                     <div class="counter-container">
+//                         <div id="counter" class="counter-number">${item.kuantitas}</div>
+//                         <div class="arrow-buttons">
+//                             <button id="arrowUp">▲</button>
+//                             <button id="arrowDown">▼</button>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 <div class="LCD-monitor"></div>
+//         `;
+//         itemList.appendChild(itemDiv);
+//     });}
+//     return total;
+// }
 function renderCartItems(items) {
     itemList.innerHTML = ''; // Pastikan itemList ada
+    const checkoutButton = document.getElementById('checkoutButton');
     if (items.length === 0) {
         itemList.innerHTML = '<p>Keranjang kosong</p>';
+        localStorage.removeItem('Total');
+        // Nonaktifkan tombol checkout
+        if (checkoutButton) {
+            checkoutButton.classList.add('disabled');
+            checkoutButton.setAttribute('disabled', 'true');
+        }
         return;
-    }else{
-    items.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('cart-item');
-        total = total + (item.kuantitas * item.harga);
-        itemDiv.innerHTML = `
+    } else {
+        if (checkoutButton) {
+            checkoutButton.classList.remove('disabled');
+            checkoutButton.removeAttribute('disabled');
+        }
+        items.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            total = total + (1*item.harga);
+            itemDiv.innerHTML = `
                 <input type="radio" name="selectedItem" value="${item.id_produk}">
                 <div class="element">${item.harga / item.kuantitas}</div>
                 <div class="element-2">${item.harga}</div>
@@ -655,12 +763,16 @@ function renderCartItems(items) {
                     </div>
                 </div>
                 <div class="LCD-monitor"></div>
-        `;
-        itemList.appendChild(itemDiv);
-    });}
+            `;
+            itemList.appendChild(itemDiv);
+        });
+    }
     return total;
 }
-  fetchCartData();
+  
+fetchCartData();
+
+
               </script>
               </div>
 <!-- <script>
@@ -711,7 +823,9 @@ function renderCartItems(items) {
                 <div class="text-wrapper">
                   <script>
                     const Total = JSON.parse(localStorage.getItem('Total'));
-                    document.write(`<p>${Total}</p>`);
+                    if (total != null ) {
+                      document.write(`<p>${Total}</p>`);                      
+                    }
                   </script>
                 </div>
               </div>
@@ -723,7 +837,9 @@ function renderCartItems(items) {
                 <div class="text-wrapper">Total:</div>
                 <div class="text-wrapper">
                 <script>
-                    document.write(`<p>${Total}</p>`);
+                if (total != null ) {
+                  document.write(`<p>${Total}</p>`);                      
+                }
                 </script>
                 </div>
               </div>
@@ -746,23 +862,93 @@ function renderCartItems(items) {
 
     <script>
       
-      document.addEventListener('DOMContentLoaded', function () {
-        const checkoutButton = document.getElementById('checkoutButton');
-        if (checkoutButton) {
-            checkoutButton.addEventListener('click', function () {
-                // Redirect ke halaman checkout
-                alert('CheckOut');
+      // document.addEventListener('DOMContentLoaded', function () {
+      //   const checkoutButton = document.getElementById('checkoutButton');
+      //   if (checkoutButton) {
+      //       checkoutButton.addEventListener('click', function () {
+      //           // Redirect ke halaman checkout
+      //           alert('CheckOut');
 
-            });
-        } else {
-            console.error('Button not found!');
-        }
-      });  
+      //       });
+      //   } else {
+      //       console.error('Button not found!');
+      //   }
+      // });  
+  
+//       document.addEventListener('DOMContentLoaded', function () {
+//     const checkoutButton = document.getElementById('checkoutButton');
+//     if (checkoutButton) {
+//         checkoutButton.addEventListener('click', async function () {
+//             try {
+//                 const response = await fetch('http://localhost:3000/api/user/Transaksi', {
+//                     method: 'POST',
+//                     headers: {
+//                         'Content-Type': 'application/json',
+//                     },
+//                     body: JSON.stringify({
+//                         id_user: userData, // Ganti dengan ID user yang sesuai
+//                     }),
+//                 });
+
+//                 const result = await response.json();
+//                 if (response.ok) {
+//                     alert('Transaksi berhasil dimulai!');
+//                     window.location.href = 'Check Out.html';
+//                     console.log('Response data:', result);
+//                 } else {
+//                     console.error('Error response:', result.msg);
+//                     alert('Gagal memulai transaksi! ' + (result.msg || ''));
+//                 }
+//             } catch (error) {
+//                 console.error('Error:', error);
+//                 alert('Terjadi kesalahan saat memulai transaksi.');
+//             }
+//         });
+//     } else {
+//         console.error('Button checkout tidak ditemukan!');
+//     }
+// });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const checkoutButton = document.getElementById('checkoutButton');
+    const itemList = document.getElementById('item-list'); // Elemen yang menampung item keranjang
+
+        // Tambahkan event listener hanya jika tombol aktif
+        checkoutButton.addEventListener('click', async function () {
+            try {
+                const userData = JSON.parse(localStorage.getItem('userData'));
+                const response = await fetch('http://localhost:3000/api/user/Transaksi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id_user: userData.account_id, // ID user dari localStorage
+                    }),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Transaksi berhasil dimulai!');
+                    window.location.href = 'Check Out.html';
+                    console.log('Response data:', result);
+                } else {
+                    console.error('Error response:', result.msg);
+                    alert('Gagal memulai transaksi! ' + (result.msg || ''));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memulai transaksi.');
+            }
+        });
+});
+
+
     </script>
 		
 
 		<!-- header footer JS -->
-		 <script src="js/headerfooterManage.js"></script>
+		 <script src="js/headerfooterLogin.js"></script>
 		<!-- jquery Min JS -->
         <script src="js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->

@@ -17,8 +17,7 @@ const tanggalSekarang = `${tahun}-${bulan.toString().padStart(2, '0')}-${tanggal
  
 const AddCart = async (req,res) => {
     try {
-        const { id_user } = req.body;
-        const { id_produk } = req.params;
+        const { id_user,id_produk } = req.body; 
 
             const cekProduk = await Product.findOne({
                 attributes: ['nama_product', 'harga', 'stock'], 

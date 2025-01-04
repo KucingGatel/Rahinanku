@@ -13,7 +13,7 @@ const Transaction_Item = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        id_produk: {
+        id_product: {
             type: DataTypes.STRING,
             allowNull: false,
         },

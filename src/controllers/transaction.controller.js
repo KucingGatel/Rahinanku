@@ -9,6 +9,7 @@ const { Op } = require('sequelize');
 const { Account } = require('../models/account.model');
 const { Product } = require('../models/produk.model');
 const { Cart_Item } = require('../models/cart_item.model');
+const { Pembayaran } = require('../models/pembayaran.model');
 
 function waktu() {
     const now = new Date();
@@ -22,13 +23,18 @@ function waktu() {
     return waktu;
 }
 
-function Id(text, id_toko){
-    const ID = 'transaction-' + text + '-' + waktu() + '-' + id_toko;
+function Id(text){
+    const ID = 'transaction-' + text + '-' + Date.now();
     return ID;
 };
 
 function IdItem(id_user, id_product){
     const id = id_user + '-' + id_product + '-' + Date.now();
+    return id;
+}
+
+function id_pembayaran(params) {
+    const id = "pembayaran-" + params;
     return id;
 }
 
@@ -45,9 +51,9 @@ const mulaitransaksi = async (req,res) => {
         });
 
         const address = await Address.findOne({
-            attributes: ['id','name', 'label', 'alamat', 'deskripsi', 'phone_number', 'email'],
+            attributes: ['id','name', 'alamat', 'deskripsi', 'phone_number'],
             where: {
-                persoal_data_id : id_data.getDataValue('personal_data_id'),
+                personal_data_id : id_data.getDataValue('personal_data_id'),
             }
         });
 
@@ -61,11 +67,15 @@ const mulaitransaksi = async (req,res) => {
         const productIds = cart_item.map(item => item.getDataValue('id_product'));
 
         const produk = await Product.findAll({
-            attributes: ['id_toko', 'harga', 'nama_product'],
+            attributes: ['nama_product'],
             where: {
                 id_product : {
                 [Op.in]: productIds,
                 }
+            },
+            include: {
+                model: Cart_Item,
+                attributes: ["kuantitas", "harga"]
             }
         });
 
@@ -73,54 +83,74 @@ const mulaitransaksi = async (req,res) => {
             attributes: ['id_transaction'], 
             where: {
                 [Op.and] : [
-                    {id_user: id_user},
+                    {account_id: id_user},
                     {status: "Proses"}
                 ]
-            }
+            },
+            // logging: console.log,
         });
 
         let id_transaksi = null;
 
-        if (cekTransaksi) {
+        console.log(cekTransaksi);
+
+        if (cekTransaksi.length != 0) {
+            // console.log(cekTransaksi);
             id_transaksi = cekTransaksi[0].getDataValue('id_transaction');
         }else{
-            id_transaksi = Id(id_user, produk.getDataValue('id_toko'));
+            id_transaksi = Id(id_user);
         }
 
         if (cekTransaksi.length == 0) {
             const createTransaction = await Transaction.create({
-                id_transaction: Id(id_user, produk.getDataValue('id_toko')),
+                id_transaction: Id(id_user),
                 harga: 0,
-                id_user: id_user,
+                account_id: id_user,
                 id_address : address.getDataValue('id'),
-                id_toko: produk.getDataValue('id_toko'),
                 status: "Proses",
             });         
         }
 
+        // const cekItemTransaksi = await Transaction_Item.findAll({
+        //     where: {
+        //         [Op.and]: [
+        //             id_product : {
+        //                 [Op.in]: productIds,
+        //             },
+        //             id_transaction: id_transaksi
+        //         ]
+                
+        //     },
+        // });
+
         const cekItemTransaksi = await Transaction_Item.findAll({
             where: {
-                id_produk : {
-                [Op.in]: productIds,
-                }
-            }
-        })
-
+                [Op.and]: [
+                    { id_product: { [Op.in]: productIds } },
+                    { id_transaction: id_transaksi }
+                ]
+            },
+        });
 
         if (cekItemTransaksi.length != cart_item.length){
+            const deleteitemtransakasi = await Transaction_Item.destroy({
+                where : {
+                    id_transaction: id_transaksi
+                }
+            });
             for (let i = 0; i < cart_item.length; i++) {
                 // const element = cart_item[i];
                 // console.log(cart_item[i].getDataValue('kuantitas'));
                 const insertItemTransaksi = await Transaction_Item.create({
                     id_transaction_item: IdItem(id_user, cart_item[i].getDataValue('id_product')),
                     id_transaction : id_transaksi,
-                    id_produk: cart_item[i].getDataValue('id_product'),
+                    id_product: cart_item[i].getDataValue('id_product'),
                     kuantitas: cart_item[i].getDataValue('kuantitas')
                 });
             }
         }
         
-        res.status(201).json({success: true, data: address, produk});
+        res.status(201).json({success: true, data: address, produk, id_transaksi});
     } 
     catch (error) {
         console.log(error);
@@ -129,172 +159,70 @@ const mulaitransaksi = async (req,res) => {
 }
 
 const transaction = async (req,res) => {
-    const { id_user,kuantitas, id_voucher } = req.body;
-
-    try {
-    
-        const cart_item = await Cart_Item.findAll({
-            attributes: ['kuantitas', 'harga', 'id_product'],
+    const { id_user, total, voucher, id_transaction, metode_pembayaran } = req.body;
+    try { 
+        const transaction_item = await Transaction_Item.findAll({
+            attributes: ['kuantitas', 'id_product'],
             where: {
-                id_keranjang: 'cart-' + id_user,
-            }
+                id_transaction: id_transaction,
+            },
+            include: [
+                {
+                    model: Product,
+                    attributes: ['nama_product', 'stock', 'harga']
+                }
+            ]
         });
 
-        const productIds = cart_item.map(item => item.getDataValue('id_product'));
+        // console.log(transaction_item);
+        const productIds = transaction_item.map(item => item.getDataValue('id_product'));
+        const TotalSatuan = transaction_item.map(item => item.Product.getDataValue('harga') * item.getDataValue('kuantitas'));
 
-        const produk = await Product.findAll({
-            attributes: ['id_toko', 'harga', 'nama_product', 'stock'],
-            where: {
-                id_product : {
-                [Op.in]: productIds,
+        const TotalKeseluruhan = TotalSatuan.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        console.log(TotalKeseluruhan);
+
+        let hargaAkhir = null;
+
+        if(voucher != null){
+            hargaAkhir = total;
+        }else{
+            hargaAkhir = TotalKeseluruhan;
+        }
+
+        const updateTransaksi = await Transaction.update(
+            { 
+                harga: hargaAkhir, 
+                id_voucher: voucher,
+                status: "Selesai",
+            },
+            {
+                where: {
+                    id_transaction: id_transaction,
                 }
             }
+        );
+
+        const buatPembayaran = await Pembayaran.create({
+            pembayaran_id: id_pembayaran(id_transaction),
+            status_pembayaran: 'belum lunas',
+            id_transaction: id_transaction,
+            metode_pembayaran: metode_pembayaran,
         });
 
-        var harga = null;
-    
-        // if (id_voucher != null) {
-        //     const voucher = await Voucher.findOne({
-        //         attributes: ['persen', 'minimal_transaction', 'maksimal_potongan'],
-        //         where: {
-        //             id_voucher: id_voucher,
-        //         },
-        //     });     
-               
-        //     const cekVoucher = await Voucher_Account.findOne({
-        //         attributes: ['status'],
-        //         where: {
-        //             [Op.and]: [
-        //                 { id_voucher: id_voucher},
-        //                 { account_id: id_user}
-        //             ]
-        //         }
-        //     });
-
-        //     const cart_item = await Cart_Item.findAll({
-        //         attributes: ['kuantitas', 'harga', 'id_product'],
-        //         where: {
-        //             id_keranjang: 'cart-' + id_user,
-        //         }
-        //     });
-    
-        //     if(kuantitas <= produk.getDataValue('stock') ){
-        //         if(cekVoucher){
-        //             harga = kuantitas * produk.getDataValue('harga');
-        //             if(produk.getDataValue('harga') >= voucher.getDataValue('minimal_transaction')){
-        //                 const diskon = harga * voucher.getDataValue('persen');
-        //                 if(diskon > harga){
-        //                     harga = harga - voucher.getDataValue('maksimal_potongan');
-        //                 }else{
-        //                     harga = harga - diskon;
-        //                 }
-        //             }
-        //         }else{
-        //             res.status(400).json({success: false, msg: "Kamu Tidak Memiliki Voucher"});
-        //         }
-        //     }else{
-        //         res.status(400).json({success: false, msg: "Stock Tidak Mencukupi"});
-        //     }
-        // }else{
-        //     if(kuantitas <= produk.getDataValue('stock') ){
-        //         harga = kuantitas * produk.getDataValue('harga');
-        //         console.log("test" + harga);
-        //     }else{
-        //         res.status(400).json({success: false, msg: "Stock Tidak Mencukupi"});
-        //     }
-        // }   
-        
-        if (id_voucher != null) {
-            const voucher = await Voucher.findOne({
-                attributes: ['persen', 'minimal_transaction', 'maksimal_potongan'],
-                where: {
-                    id_voucher: id_voucher,
-                },
-            });
-        
-            const cekVoucher = await Voucher_Account.findOne({
-                attributes: ['status'],
-                where: {
-                    [Op.and]: [
-                        { id_voucher: id_voucher },
-                        { account_id: id_user }
-                    ]
-                }
-            });
-        
-            if (!cekVoucher) {
-                res.status(400).json({ success: false, msg: "Kamu Tidak Memiliki Voucher" });
-                return;
+        const deleteCartItem = await Cart_Item.destroy({
+            where:{
+                id_keranjang: `cart-${id_user}`,
             }
-        
-            produk.forEach(async item => {
-                if (kuantitas <= item.getDataValue('stock')) {
-                    harga = kuantitas * item.getDataValue('harga');
-                    if (item.getDataValue('harga') >= voucher.getDataValue('minimal_transaction')) {
-                        const diskon = harga * voucher.getDataValue('persen');
-                        harga = diskon > voucher.getDataValue('maksimal_potongan') ?
-                            harga - voucher.getDataValue('maksimal_potongan') :
-                            harga - diskon;
-                    }
-                } else {
-                    res.status(400).json({ success: false, msg: "Stock Tidak Mencukupi" });
-                }
-            });
-        } else {
-            produk.forEach(async item => {
-                if (kuantitas <= item.getDataValue('stock')) {
-                    harga = kuantitas * item.getDataValue('harga');
-                } else {
-                    res.status(400).json({ success: false, msg: "Stock Tidak Mencukupi" });
-                }
-            });
-        }        
+        })
 
-        if(harga != null){
-            const updateTransaction = await Transaction.update(
-                {
-                    harga: harga,
-                    id_voucher: id_voucher,
-                    status: "Selesai"
-                },
-                {
-                    where: {
-                        [Op.and] : [
-                            {id_user: id_user},
-                            {status: "Proses"}
-                        ]
-                    }
-                }
-            );
-            
-            // const addItem = await Transaction_Item.create({
-            //     id_transaction_item : IdItem(id_user, id_product),
-            //     id_transaction: idTransaksi.getDataValue('id_transaction'),
-            //     id_produk: id_product,
-            //     kuantitas: kuantitas
-            // });
+        res.status(201).json({success: true, msg: "data berhasil masuk"});
 
-            // const nowStock = produk.getDataValue('stock') - kuantitas;
-
-            // const kurangin = await Product.update(
-            //     {
-            //         stock: nowStock,
-            //     },
-            //     {
-            //         where: {
-            //             id_product: id_product,
-            //         }
-            //     }
-            // )
-                res.status(201).json({success: true, msg: "data berhasil masuk"});
-        }       
-    
     } catch (error) {
         console.log(error);
         res.status(400).json({success: false, msg: "Error"});
     }
 
-    }
+}
 
 
 const Destroy = async (req,res) =>{
@@ -309,8 +237,55 @@ const Destroy = async (req,res) =>{
     } catch (error) {
         res.status(400).json({success: false, msg: 'ERORRRRRRRRR'});
     }
+};
+
+const CekVoucher = async (req,res) => {
+    const { id_voucher,id_user,total } = req.body;
+    try {
+        const cekVoucher = await Voucher_Account.findOne({
+            attributes: ["status"],
+            where: {
+                [Op.and]: [
+                    { id_voucher: id_voucher },
+                    { account_id: id_user },
+                    { status: 'punya'},
+                ]
+            },
+            include: [
+                {
+                    model: Voucher,
+                    attributes: ['persen', 'minimal_transaction', 'maksimal_potongan'],
+                },
+            ],
+        });
+
+        let harga_akhir;
+        
+        if (cekVoucher.length <= 0) {
+            res.status(400).json({ success: false, msg: "Kamu Tidak Memiliki Voucher" });
+            return;
+        }else{
+            if (Number(total) < cekVoucher.Voucher.getDataValue("minimal_transaction")) {
+                console.log(total < cekVoucher.Voucher.getDataValue("minimal_transaction")); 
+                console.log(total); 
+                console.log(cekVoucher.Voucher.getDataValue("minimal_transaction")); 
+                res.status(201).json({ success: true, msg: "Anda Tidak mencapai minimal transaksi"});
+            }else{
+                const diskon = total * cekVoucher.Voucher.getDataValue("persen") / 100;
+                // console.log(diskon);
+                if (diskon <= cekVoucher.Voucher.getDataValue("maksimal_potongan")) {
+                    harga_akhir = total - diskon;
+                }else{
+                    harga_akhir = total - cekVoucher.Voucher.getDataValue("maksimal_potongan");
+                }
+            }
+            res.status(201).json({ success: true, msg: "Voucher Sudah Terpasang", data: harga_akhir});
+        }
+    } catch (error) {
+        res.status(404).json({ success: false, msg: "server internal error" });
+    }
 }
 
 module.exports = {
-    mulaitransaksi, transaction, Destroy
+    mulaitransaksi, transaction, Destroy, CekVoucher
 }

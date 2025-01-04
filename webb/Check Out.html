@@ -1,3 +1,100 @@
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+    try {
+        // Ambil data user dari localStorage (pastikan data user sudah disimpan saat login)
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        if (!userData || !userData.account_id) {
+            alert('User tidak ditemukan, silakan login terlebih dahulu.');
+            return;
+        }
+
+        // Kirim permintaan API untuk memulai transaksi
+        const response = await fetch('http://localhost:3000/api/user/Transaksi', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id_user: userData.account_id, // ID user dari localStorage
+            }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log('Transaksi berhasil dimulai:', result);
+            // Anda bisa menampilkan data hasil transaksi di halaman
+            populateCheckoutPage(result);
+        } else {
+            console.error('Error response:', result.msg);
+            alert('Gagal memulai transaksi: ' + (result.msg || 'Terjadi kesalahan.'));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat memproses transaksi.');
+    }
+});
+
+// Fungsi untuk mengisi halaman Check Out dengan data API
+function populateCheckoutPage(data) {
+    // Contoh: Tampilkan alamat user
+    const addressElement = document.querySelector('.address-section');
+    if (addressElement && data.data) {
+        addressElement.textContent = `${data.data.name}, ${data.data.alamat}`;
+    }
+
+    // Contoh: Tampilkan daftar produk
+    const productContainer = document.querySelector('.product-list');
+    if (productContainer && data.produk) {
+        productContainer.innerHTML = data.produk
+            .map(
+                (product) =>
+                    `<div>
+                        <p>Nama Produk: ${product.nama_product}</p>
+                        <p>Harga: Rp. ${product.harga}</p>
+                    </div>`
+            )
+            .join('');
+    }
+}
+</script> -->
+<script>
+const userData = JSON.parse(localStorage.getItem('userData'));
+if (!userData || !userData.account_id) {
+    alert('User tidak ditemukan, silakan login terlebih dahulu.');
+    window.location.href = 'login.html';
+}
+console.log(userData.account_id);
+    window.addEventListener('beforeunload', async (event) => {
+  try {
+    // Data yang akan dikirim ke API
+    const id_user = userData.account_id; // Ganti dengan ID user yang sesuai
+
+    // Panggil API menggunakan fetch
+    const response = await fetch('http://localhost:3000/api/user/ExitTransaksi', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id_user }),
+    });
+
+    // Opsional: Log hasil respons API
+    if (response.ok) {
+      const result = await response.json();
+      console.log(result); // Output: { success: true, msg: 'ANJAYY' }
+    } else {
+      console.error('Error saat memanggil API ExitTransaksi');
+    }
+  } catch (error) {
+    console.error('Terjadi kesalahan:', error);
+  }
+
+  // Pesan ini mungkin ditampilkan tergantung browser
+  event.returnValue = ''; 
+});
+
+</script>
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -568,31 +665,31 @@
                   <div class="frame-2">
                     <div class="frame-3">
                       <label for="fname">First Name</label>
-                      <input type="text" id="fname" name="firstname"> 
+                      <input type="text" id="fname" name="firstname" disabled> 
                     </div>
                     <div class="frame-3">
-                      <label for="fname">Company Name</label>
-                      <input class="luas" type="text" id="fname" name="firstname"> 
+                      <label for="fname">Label Address</label>
+                      <input class="luas" type="text" id="fname" name="firstname" disabled> 
                     </div>
                     <div class="frame-3">
                       <label for="fname">Street Address</label>
-                      <input class="luas" type="text" id="fname" name="firstname"> 
+                      <input class="luas" type="text" id="fname" name="firstname" disabled> 
                     </div>
                     <div class="frame-3">
                       <label for="fname">Apartment, floor, etc. (optional)</label>
-                      <input class="luas" type="text" id="fname" name="firstname"> 
+                      <input class="luas" type="text" id="fname" name="firstname" disabled> 
                     </div>
                     <div class="frame-3">
                       <label for="fname">Town/City*</label>
-                      <input class="luas"  type="text" id="fname" name="firstname"> 
+                      <input class="luas"  type="text" id="fname" name="firstname" disabled> 
                     </div>
                     <div class="frame-3">
                       <label for="fname">Phone Number*</label>
-                      <input class="luas"  type="text" id="fname" name="firstname"> 
+                      <input class="luas"  type="text" id="fname" name="firstname" disabled> 
                     </div>
                     <div class="frame-3">
                       <label for="fname">Email Address*</label>
-                      <input class="luas" type="text" id="fname" name="firstname"> 
+                      <input class="luas" type="text" id="fname" name="firstname" disabled> 
                     </div>
                   </div>
                   <form action="/action_page.php">
@@ -601,29 +698,130 @@
                   </form>
                 </div>
                 <div class="frame-6">
+                <div class="product-container">
                   <div class="frame-7">
-                    <div class="frame-8">
-                      <div class="img-wrapper"><img class="g-x" src="img/canang.png" /></div>
-                      <div class="frame-9">
-                        <div class="text2">Canang</div>
-                        <div class="text1">Rp. 10.000</div>
-                      </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', async function () {
+                            try {
+                                const response = await fetch('http://localhost:3000/api/user/Transaksi', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                        id_user: userData.account_id,
+                                    }),
+                                });
+                        
+                                const result = await response.json();
+                        
+                                if (response.ok) {
+                                    console.log('Transaksi berhasil dimulai:', result);
+                                    localStorage.setItem('id_transaksi', result.id_transaksi)
+                                    populateUserInfo(result.data);
+                                    populateProductList(result.produk);
+                                } else {
+                                    console.error('Error response:', result.msg);
+                                    alert('Gagal memulai transaksi: ' + (result.msg || 'Terjadi kesalahan.'));
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                                alert('Terjadi kesalahan saat memproses transaksi.');
+                            }
+                        });
+                        
+                        function populateUserInfo(data) {
+                            const { name, label, alamat, deskripsi, phone_number, email } = data;
+                            const kota = alamat.split(",");
+                            // Mengisi informasi pengguna ke dalam form checkout
+                            document.querySelector('.frame-2 .frame-3:nth-child(1) input').value = name || '';
+                            document.querySelector('.frame-2 .frame-3:nth-child(2) input').value = label || '';
+                            document.querySelector('.frame-2 .frame-3:nth-child(3) input').value = alamat || '';
+                            document.querySelector('.frame-2 .frame-3:nth-child(4) input').value = deskripsi || '';
+                            document.querySelector('.frame-2 .frame-3:nth-child(5) input').value = kota[kota.length - 1]; // Contoh static value untuk Kota
+                            document.querySelector('.frame-2 .frame-3:nth-child(6) input').value = phone_number; // Placeholder Phone Number
+                            document.querySelector('.frame-2 .frame-3:nth-child(7) input').value = email; // Placeholder Email
+                        }
+                        
+                        // function populateProductList(products) {
+                        //     const productContainer = document.querySelector('.frame-10');
+                        //     if (productContainer && products) {
+                        //         const productHTML = products
+                        //             .map(
+                        //                 (product) => `
+                        //                 <div class="frame-10">
+                        //                     <div class="img-wrapper"><img class="gcq-x" src="img/canang.png" /></div>
+                        //                     <div class="frame-11">
+                        //                         <div class="text3">${product.nama_product}</div>
+                        //                         <div class="text4">Rp. ${product.harga.toLocaleString()}</div>
+                        //                     </div>
+                        //                 </div>`
+                        //             )
+                        //             .join('');
+                        
+                        //         productContainer.innerHTML = productHTML;
+                        //     }
+                        // }
+
+                        function populateProductList(products) {
+    const productContainer = document.querySelector('.product-container'); // Pastikan ini adalah kontainer utama
+
+    var totalco = 0;
+    if (productContainer && products && products.length > 0) {
+        const productHTML = products
+            .map(
+                (product) => `
+                <div class="frame-10">
+                    <div class="img-wrapper">
+                        <img class="gcq-x" src="img/canang.png"/>
                     </div>
-                    <div class="frame-10">
-                      <div class="img-wrapper"><img class="gcq-x" src="img/canang.png" /></div>
-                      <div class="frame-11">
-                        <div class="text3">Canang</div>
-                        <div class="text4">Rp. 5.000</div>
-                      </div>
+                    <div class="frame-11">
+                        <div class="text3">${product.nama_product}</div>
+                        <div class="text4">Rp. ${parseFloat(product.Cart_Items[0].harga).toLocaleString()}</div>
+                    <p hidden> ${totalco += product.Cart_Items[0].harga * 1} </p>
                     </div>
+                </div> 
+                `,
+            )
+            .join('');
+            localStorage.setItem('total', totalco);
+
+        productContainer.innerHTML = productHTML;
+    } else {
+        productContainer.innerHTML = '<p>Tidak ada produk yang tersedia.</p>';
+    }
+}
+                                
+const MulaiTransaksi = localStorage.getItem('id_transaksi');
+    if (MulaiTransaksi) {
+        console.log(MulaiTransaksi)            
+    }else{
+        location.reload();
+    }
+                        </script>    
                   </div>
-                  <div class="frame-12">
+                </div>
+
+                <div class="frame-12">
                     <div class="frame-12">
                       <div class="frame-12">
                         <div class="frame-12">
                           <div class="frame-13">
                             <div class="text-wrapper-4">Subtotal:</div>
-                            <div class="text-wrapper-4">Rp. 15.000</div>
+                            <div class="text-wrapper-4">
+                                <Script>
+                                    const CoTotal = localStorage.getItem("total");
+                                    const diskon = localStorage.getItem("diskon");
+                                    if (CoTotal == null) {
+                                        location.reload();
+                                    }
+                                    if(diskon != null){
+                                        document.write(`<p>Rp. ${diskon}</p>`)
+                                    }else if(CoTotal != null){
+                                        document.write(`<p>Rp. ${CoTotal}</p>`)
+                                    }     
+                                </Script>
+                            </div>
                           </div>
                           <div class="under-line"></div>
                         </div>
@@ -636,10 +834,22 @@
                     </div>
                     <div class="frame-15">
                       <div class="text-wrapper-4">Total:</div>
-                      <div class="text-wrapper-4">Rp. 15.000</div>
+                      <div class="text-wrapper-4">
+                        
+                        <Script>
+                            if (CoTotal == null) {
+                                location.reload();
+                            }
+                            if(diskon != null){
+                                document.write(`<p>Rp. ${diskon}</p>`)
+                            }else if(CoTotal != null){
+                                document.write(`<p>Rp. ${CoTotal}</p>`)
+                            } 
+                        </Script>
+                        </div>
                     </div>
                   </div>
-                  <div class="frame-16">
+                  <!-- <div class="frame-16">
                     <label class="container">Bank
                         <input type="radio" checked="checked" name="radio">
                         <span class="checkmark"></span>
@@ -655,16 +865,95 @@
                     <label class="container">Cash on Delivery
                         <input type="radio" checked="checked" name="radio">
                         <span class="checkmark"></span>
+                  </div> -->
+                  <div class="frame-16">
+                    <label class="container">Bank
+                      <input type="radio" name="radio" value="transfer" checked>
+                      <span class="checkmark"></span>
+                    </label>
+                    <div class="frame-17">
+                      <div class="image-wrapper"><img class="image" src="img/image 32.svg" /></div>
+                      <div class="image-wrapper"><img class="img" src="img/image 30.svg" /></div>
+                      <div class="image-wrapper"><img class="image-2" src="img/image 31.svg" /></div>
+                      <div class="image-wrapper"><img class="image-3" src="img/image 33.svg" /></div>
+                    </div>
+                  </div>
+                  <div class="frame-5">
+                    <label class="container">Cash on Delivery
+                      <input type="radio" name="radio" value="cod">
+                      <span class="checkmark"></span>
+                    </label>
                   </div>
                   <div class="coupon-code">
-                    <form>
+                    <!-- <form>
                       <input type="text" name="coupon" placeholder="Coupon Code" />
                     </form>
                     
                     <div class="btn"><div class="view-all-products">Apply Coupon</div></div>
-                
+                 -->
+
+                 <form id="voucher-form">
+                    <input type="text" name="coupon" id="coupon-code" placeholder="Coupon Code" />
+                  </form>
+                  
+                  <div class="btn">
+                    <div class="view-all-products" id="apply-coupon">Apply Coupon</div>
                   </div>
-                  <div class="btn"><div class="view-all-products">Place Order</div></div>
+                    <script>
+
+// Tombol Apply Coupon  console.log(localStorage.getItem("voucher"));
+
+    document.getElementById('apply-coupon').addEventListener('click', async () => {
+        // Ambil nilai dari form
+        const id_voucher = document.getElementById('coupon-code').value;
+        if (!id_voucher) {
+            alert("Masukkan kode voucher!");
+            return;
+        }
+        if (localStorage.getItem("voucher")){
+            alert("Voucher Sudah terpasang");
+            location.reload();
+            return;
+        }else {
+            // Data untuk dikirim ke API
+            const requestData = {
+                id_voucher: id_voucher,
+                id_user: userData.account_id,
+                total: localStorage.getItem("total"),
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/user/Cekvoucher', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                alert(result.msg);
+                if (result.data) {
+                    localStorage.setItem('diskon', result.data);
+                    localStorage.setItem('voucher', id_voucher);
+                    console.log("Harga akhir:", result.data);
+                    location.reload();
+                }
+                } else {
+                alert(result.msg || "Terjadi kesalahan saat memproses voucher.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Gagal menghubungi server. Cek koneksi atau coba lagi.");
+            }
+        }
+    });
+                 </script>
+                  </div>
+                  <div class="btn">
+                    <div id="placeOrder" class="view-all-products">Place Order</div>
+                </div>
                 </div>
               </div>
             </div>
@@ -672,7 +961,45 @@
 		
 		<my-footer></my-footer>
 		
-
+        <script>
+            document.getElementById("placeOrder").addEventListener("click", async () => {
+              const metode_pembayaran = document.querySelector("input[name='radio']:checked").value;
+              const id = userData.account_id;
+            // console.log(metode_pembayaran);
+              const data = {
+                id_user: id,
+                total: diskon,
+                id_transaction: MulaiTransaksi,
+                metode_pembayaran: metode_pembayaran,
+              };
+          
+              try {
+                const response = await fetch("http://localhost:3000/api/user/Transaction", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                });
+          
+                const result = await response.json();
+                if (result.success) {
+                  alert("Order placed successfully!");
+                  window.location.href = 'paymentsuccess.html';
+                  localStorage.removeItem('diskon');
+                  localStorage.removeItem('voucher');
+                  localStorage.removeItem('total');
+                  localStorage.removeItem('Total');
+                  localStorage.removeItem('id_transaksi');
+                } else {
+                  alert("Failed to place the order.");
+                }
+              } catch (error) {
+                console.error("Error:", error);
+                alert("Something went wrong.");
+              }
+            });
+          </script>
 
 		<!-- header footer JS -->
 		 <script src="js/headerfooterLogin.js"></script>
@@ -716,5 +1043,7 @@
 		<script src="js/bootstrap.min.js"></script>
 		<!-- Main JS -->
 		<script src="js/main.js"></script>
+
+
     </body>
 </html>

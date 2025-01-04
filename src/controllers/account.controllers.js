@@ -39,7 +39,10 @@ const CreateAccount = async (req,res) =>{
                 email: email,
                 password: Hash(Salt,password,salT),
             });
+
+            
             res.status(201).json({success: true, data: Id(username)});
+
         }else {
             res.status(400).json({ success: false, msg:'Username or Email is already in use'});
         }

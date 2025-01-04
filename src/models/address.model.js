@@ -20,6 +20,10 @@ const Address = sequelize.define(
                 len: [10, 15], 
             },
         },
+        deskripsi:{
+            type: DataTypes.TEXT,
+            allowNull: true
+        }
 	},
 	{ paranoid: true }
 );

@@ -536,7 +536,7 @@
           if (result.success) {
             console.log('Login berhasil:', result.data);
             localStorage.setItem('userData', JSON.stringify(result.data));
-            alert(`Login berhasil! Anda akan diarahkan ke dashboard. ${result.data}`);
+            alert(`Login berhasil! Anda akan diarahkan ke dashboard.`);
             window.location.href = 'indexLog.html';
           } else {
             alert('Login gagal: ' + result.message);

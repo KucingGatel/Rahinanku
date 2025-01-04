@@ -18,8 +18,9 @@ const { Video } = require('../models/video.model');
 const { Reset_Password } = require('../models/reset_password.model');
 const { Transaction } = require('../models/transaction.model');
 const { Transaction_Item } = require('../models/transaction_item.model');
-const { Voucher_Item } = require('../models/voucher_item.model');
+const { Voucher_Item, Voucher_Account } = require('../models/voucher_item.model');
 const { Voucher } = require('../models/voucher.model');
+const { Pembayaran } = require('../models/pembayaran.model');
 
 
 async function authenticateDB(sequelize) {
@@ -35,8 +36,8 @@ async function authenticateDB(sequelize) {
 		Account.hasOne(Personal_Data, { foreignKey: 'account_id'});
 		Personal_Data.belongsTo(Account, { foreignKey: 'account_id'});
 
-		Personal_Data.hasMany(Address, { foreignKey: 'persoal_data_id'});
-		// Address.belongsTo(Personal_Data, { foreignKey: 'personal_data_id'});
+		Personal_Data.hasMany(Address, { foreignKey: 'personal_data_id'});
+		Address.belongsTo(Personal_Data, { foreignKey: 'personal_data_id'});
 
 		Account.hasOne(Cart, { foreignKey: 'account_id'});
 		Cart.belongsTo(Account, { foreignKey: 'account_id'});
@@ -109,7 +110,22 @@ async function authenticateDB(sequelize) {
 
 		// Komentar.belongsTo(Foto, { foreignKey: 'id_komentar'});
 		// Komentar.belongsTo(Video, { foreignKey: 'id_komentar'});
+
+		Transaction_Item.belongsTo(Product,{foreignKey: 'id_product'});
+		Product.belongsTo(Transaction_Item,{foreignKey: 'id_product'});
 	
+		Transaction.hasOne(Pembayaran,{foreignKey: 'id_transaction'});
+		Pembayaran.belongsTo(Transaction,{foreignKey: 'id_transaction'});
+
+		Voucher.hasMany(Voucher_Account,{foreignKey: 'id_voucher'});
+		Voucher_Account.belongsTo(Voucher,{foreignKey: 'id_voucher'});
+
+		Account.hasMany(Voucher_Account,{foreignKey: 'account_id'});
+		Voucher_Account.belongsTo(Account,{foreignKey: 'account_id'});
+
+		Account.hasMany(Transaction, {foreignKey: 'account_id'});
+		Transaction.belongsTo(Account, {foreignKey: 'account_id'});
+
 		// await sequelize.sync({ alter: true });
 		await sequelize.sync();
 		await sequelize.authenticate();
