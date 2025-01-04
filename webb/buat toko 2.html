@@ -63,10 +63,10 @@
           const userData = JSON.parse(localStorage.getItem('userData'));
           
           const script = document.createElement('script'); // Membuat elemen <script> baru
-            if (!userData || !userData.account_id) {
-                alert('User tidak ditemukan, silakan login terlebih dahulu.');
-                 window.location.href = 'login.html';
-            }
+            // if (!userData || !userData.account_id) {
+            //     alert('User tidak ditemukan, silakan login terlebih dahulu.');
+            //      window.location.href = 'login.html';
+            // }
           if (userData && userData.account_id != null) {
             script.src = "js/headerfooterLogin.js";
             console.log("kontol")
@@ -480,28 +480,32 @@
                     aria-label="Town/City"
                   />
                 </div> -->
-                <div class="form-group">
-                  <label for="town-city">Town/City</label>
-                  <select
-                    id="town-city"
-                    class="form-control"
-                    required
-                    aria-label="Town/City"
-                  >
-                    <option value="" disabled selected>Choose your town/city</option>
-                    <option value="Denpasar">Denpasar</option>
-                    <option value="Badung">Badung</option>
-                    <option value="Gianyar">Gianyar</option>
-                    <option value="Tabanan">Tabanan</option>
-                    <option value="Bangli">Bangli</option>
-                    <option value="Klungkung">Klungkung</option>
-                    <option value="Karangasem">Karangasem</option>
-                    <option value="Buleleng">Buleleng</option>
-                    <option value="Jembrana">Jembrana</option>
+                  <div class="form-group">
+                    <div style="margin-bottom: 2%;">
+                      <label for="town-city">Town/City</label>
+                    </div>
+                    <select
+                      id="town-city"
+                      class="form-control"
+                      required
+                      aria-label="Town/City"
+                    >
+                      <option value="" disabled selected>Choose your town/city</option>
+                      <option value="Denpasar">Denpasar</option>
+                      <option value="Badung">Badung</option>
+                      <option value="Gianyar">Gianyar</option>
+                      <option value="Tabanan">Tabanan</option>
+                      <option value="Bangli">Bangli</option>
+                      <option value="Klungkung">Klungkung</option>
+                      <option value="Karangasem">Karangasem</option>
+                      <option value="Buleleng">Buleleng</option>
+                      <option value="Jembrana">Jembrana</option>
                   </select>
-                </div>
+                  </div>
                 <div class="form-group">
-                  <label for="phone-number">Jam Operasional</label>
+                  <div style="margin-top: 20%;">
+                    <label for="phone-number">Jam Operasional</label>
+                  </div>
                   <input
                     id="phone-number"
                     class="form-control"
@@ -529,8 +533,9 @@
         </div>
       </div>
     </div>
-		<my-footer></my-footer>
+
 		
+		<my-footer></my-footer>
 
 
 		<!-- jquery Min JS -->
