@@ -56,6 +56,24 @@
             </div>
         </div>
         <!-- End Preloader -->
+
+		<script>
+			const userData = JSON.parse(localStorage.getItem('userData'));
+			
+			const script = document.createElement('script'); // Membuat elemen <script> baru
+				if (!userData || !userData.account_id) {
+    				alert('User tidak ditemukan, silakan login terlebih dahulu.');
+   					window.location.href = 'login.html';
+				}
+			if (userData && userData.account_id != null) {
+			  script.src = "js/headerfooterLogin.js";
+			  console.log("kontol")
+			} else {
+			  script.src = "js/headerfooterManage.js";
+			}
+		  
+			document.head.appendChild(script); // Menyisipkan script ke dalam <head>
+		</script>
 		
 		<my-header></my-header>
 		<style>
@@ -157,8 +175,6 @@
 		
 
 
-		<!-- header footer JS -->
-		 <script src="js/headerfooterManage.js"></script>
 		<!-- jquery Min JS -->
         <script src="js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->

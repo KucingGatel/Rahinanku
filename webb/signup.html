@@ -242,7 +242,7 @@
             <h1 class="header-title" style="margin-bottom: 20px">Create Account</h1>
           </div>
 
-          <form class="form-container">
+          <!-- <form class="form-container">
             <div class="input-group">
               <label for="fullName" class="input-label">Full Name</label>
               <div class="input-field password-field">
@@ -289,7 +289,39 @@
               </button>
               <p class="login-text">Already have an account? <a style="color: #ef8f00;"  class="highlight-text" href="login.html">Log In</a></p>
             </div>
+          </form> -->
+
+          <form class="form-container" id="signupForm">
+            <div class="input-group">
+              <label for="fullName" class="input-label">Full Name</label>
+              <div class="input-field password-field">
+                <input id="fullName" name="username" class="input-field" placeholder="Enter your full name" required aria-required="true" style="border: none" />
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="email" class="input-label">Email Address</label>
+              <div class="input-field password-field">
+                <input id="email" name="email" class="input-field" placeholder="Enter your email address" required aria-required="true" style="border: none" />
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="password" class="input-label">Password</label>
+              <div class="input-field password-field">
+                <input id="password" name="password" class="password" placeholder="Enter your password" required aria-required="true" style="border: none" />
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="confirmPassword" class="input-label">Confirm Password</label>
+              <div class="input-field password-field">
+                <input id="confirmPassword" placeholder="Confirm your password" required aria-required="true" style="border: none" />
+              </div>
+            </div>
+            <div class="action-container">
+              <button type="submit" class="btn" style="width: 350px;">Sign Up</button>
+            </div>
           </form>
+          
+
         </div>
       </div>
     </div>
@@ -338,6 +370,51 @@
     <script src="js/main.js"></script>
 
     <script>
+
+document.getElementById('signupForm').addEventListener('submit', async function (e) {
+  e.preventDefault(); // Mencegah reload halaman
+
+  // Ambil nilai dari form
+  const username = document.getElementById('fullName').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+
+  // Validasi password
+  if (password !== confirmPassword) {
+    alert('Passwords do not match!');
+    return;
+  }
+
+  try {
+    // Kirim data ke server
+    const response = await fetch('http://localhost:3000/api/guest/Register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert('Account created successfully!');
+      window.location.href = 'indexLog.html'; // Redirect ke halaman login
+    } else {
+      alert(data.msg || 'Failed to create account');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('An error occurred. Please try again.');
+  }
+});
+
+
       function togglePassword(fieldId) {
         const field = document.getElementById(fieldId);
         const toggleButton = field.nextElementSibling;

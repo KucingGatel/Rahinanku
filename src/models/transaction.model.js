@@ -13,12 +13,12 @@ const Transaction = sequelize.define(
             type: DataTypes.STRING,
             allowNull:false,
         },
-		id_user:{
+		account_id:{
 			type: DataTypes.STRING,
-			allowNull: false,
+			allowNull: true,
 		},
 		id_address:{
-			type: DataTypes.STRING,
+			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 		id_voucher:{

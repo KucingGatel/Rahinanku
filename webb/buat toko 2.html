@@ -59,7 +59,23 @@
             </div>
         </div>
         <!-- End Preloader -->
-		
+				<script>
+          const userData = JSON.parse(localStorage.getItem('userData'));
+          
+          const script = document.createElement('script'); // Membuat elemen <script> baru
+            if (!userData || !userData.account_id) {
+                alert('User tidak ditemukan, silakan login terlebih dahulu.');
+                 window.location.href = 'login.html';
+            }
+          if (userData && userData.account_id != null) {
+            script.src = "js/headerfooterLogin.js";
+            console.log("kontol")
+          } else {
+            script.src = "js/headerfooterManage.js";
+          }
+          
+          document.head.appendChild(script); // Menyisipkan script ke dalam <head>
+        </script>
 		<my-header></my-header>
 
         <style>
@@ -453,7 +469,7 @@
                     aria-label="Street Address"
                   />
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="town-city">Town/City</label>
                   <input
                     id="town-city"
@@ -463,27 +479,36 @@
                     required
                     aria-label="Town/City"
                   />
+                </div> -->
+                <div class="form-group">
+                  <label for="town-city">Town/City</label>
+                  <select
+                    id="town-city"
+                    class="form-control"
+                    required
+                    aria-label="Town/City"
+                  >
+                    <option value="" disabled selected>Choose your town/city</option>
+                    <option value="Denpasar">Denpasar</option>
+                    <option value="Badung">Badung</option>
+                    <option value="Gianyar">Gianyar</option>
+                    <option value="Tabanan">Tabanan</option>
+                    <option value="Bangli">Bangli</option>
+                    <option value="Klungkung">Klungkung</option>
+                    <option value="Karangasem">Karangasem</option>
+                    <option value="Buleleng">Buleleng</option>
+                    <option value="Jembrana">Jembrana</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="phone-number">Phone Number</label>
+                  <label for="phone-number">Jam Operasional</label>
                   <input
                     id="phone-number"
                     class="form-control"
-                    placeholder="Enter your phone number"
+                    placeholder="Example: 10:00 - 20:00"
                     type="tel"
                     required
                     aria-label="Phone Number"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="email-address">Email Address</label>
-                  <input
-                    id="email-address"
-                    class="form-control"
-                    placeholder="Enter your email address"
-                    type="email"
-                    required
-                    aria-label="Email Address"
                   />
                 </div>
                 <!-- <button class="btn" onclick="redirectToCheckEmail()"><div class="text-wrapper-2">Create Shop</div></button> -->
@@ -508,8 +533,6 @@
 		
 
 
-		<!-- header footer JS -->
-		 <script src="js/headerfooterManage.js"></script>
 		<!-- jquery Min JS -->
         <script src="js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->
