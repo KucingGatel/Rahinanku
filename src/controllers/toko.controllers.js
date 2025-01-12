@@ -22,7 +22,7 @@ const generateTokoID = async () => {
       const count = await Toko.count();
   
       // Menambahkan 1 untuk ID baru
-      const newIdNumber = count + 1;
+      const newIdNumber = count + 2;
   
       // Format ID menjadi "toko" diikuti angka dengan padding nol (misalnya toko001)
       const formattedId = `toko${String(newIdNumber).padStart(3, '0')}`;
@@ -37,8 +37,7 @@ const generateTokoID = async () => {
 
 const BuatToko = async (req,res) => {
     try {
-
-        const { nama_toko, lokasi, jam_operasional, account_id } = req.body;
+        const { nama_toko, lokasi, jam_operasional, account_id, kota } = req.body;
         const id = await generateTokoID(); 
         console.log(account_id);
         const buat = await Toko.create({
@@ -50,6 +49,8 @@ const BuatToko = async (req,res) => {
             waktu: "00:00:00",
             icon: "test.jpg",
             account_id: account_id,
+            kota: kota,
+            status: "pending",
         });
         res.status(201).json({success: true, data: buat})
     } catch (error) 
@@ -72,7 +73,26 @@ const TopToko = async (req,res) => {
     }
 }
 
+const ReadTokoById = async (req,res) => {
+    const {id_toko} = req.params;
+    try {
+        const read = await Toko.findOne({
+            attributes: ['nama_toko', 'lokasi', 'jam_operasional', 'kota'],
+            where: {
+                id_toko: id_toko,
+            },
+            include:{
+                model: Product,
+                attributes: ['nama_product', 'harga', 'id_product']
+            }
+        })
+        res.status(201).json({success: true, data : read});
+    } catch (error) {
+        res.status(404).json({success: false});
+    }
+}
+
 
 module.exports = {
-    BuatToko,TopToko
+    BuatToko,TopToko, ReadTokoById
 }

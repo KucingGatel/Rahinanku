@@ -136,7 +136,7 @@ if (!userData || !userData.account_id) {
                       </div>
                     </div>
                     <div class="profile-form-column">
-                      <form class="form-container">
+                      <form class="form-container" id="profile-form">
                         <h1 class="form-title">Manage My Account</h1>
                         <div class="form-wrapper">
                           <div class="form-fields">
@@ -145,12 +145,12 @@ if (!userData || !userData.account_id) {
                               <input type="text" id="username" class="form-input" aria-label="Username">
                             </div>
                             <div class="input-group">
-                                <label for="firstname" class="input-label">First Name</label>
-                                <input type="text" id="firstname" class="form-input" aria-label="First Name">
+                              <label for="firstname" class="input-label">First Name</label>
+                              <input type="text" id="firstname" class="form-input" aria-label="First Name" readonly>
                             </div>
                             <div class="input-group">
                               <label for="email" class="input-label">Address<span class="required">*</span></label>
-                              <input type="email" id="email" class="form-input" required aria-label="Email Address" aria-required="true">
+                              <input type="email" id="email" class="form-input" required aria-label="Email Address" readonly>
                             </div>
                             <div class="input-group">
                               <label for="phone" class="input-label">Phone Number</label>
@@ -159,8 +159,8 @@ if (!userData || !userData.account_id) {
                             <div class="input-group">
                               <label for="gender" class="input-label">Gender</label>
                               <select id="gender" class="form-input" aria-label="Gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="man">Male</option>
+                                <option value="woman">Female</option>
                               </select>
                             </div>
                             <div class="input-group">
@@ -168,18 +168,19 @@ if (!userData || !userData.account_id) {
                               <input type="date" id="birthdate" class="form-input" aria-label="Birth Date">
                             </div>
                           </div>
-                          <div style="margin-top: 5%;">
-                            <a href="buat toko 2.html">
+                          <div id="store-link-container" style="margin-top: 5%;">
+                            <!-- <a href="buat-toko-2.html">
                               <h5 style="color: grey;">Make a Store!</h5>
-                            </a>
+                            </a> -->
                           </div>
+                        </div>
+                        <div style="margin-left: 20%;; margin-top: 5%;">
+                          <button type="button" class="btn btn-cancel">Cancel</button>
+                          <!-- <button style="margin-left: 30%;"   type="submit" class="btn btn-save">Save Changes</button> -->
+                          <button style="margin-left: 30%;" type="submit" class="btn btn-save" id="save-button">Save Changes</button>
                         </div>
                       </form>
                     </div>
-                  </div>
-                  <div style="margin-left: 20%;; margin-top: 5%;">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button style="margin-left: 30%;"   type="submit" class="btn btn-save">Save Changes</button>
                   </div>
                 </div>
               </div>
@@ -187,7 +188,194 @@ if (!userData || !userData.account_id) {
 		
 		<my-footer></my-footer>
 		
+    <!-- <script>
+      // URL API
+      const API_URL = "http://localhost:3000/api/user/Profile";
+    
+      // Function untuk memuat profil user
+      async function loadProfile() {
+        try {
+          // Ambil ID user dari Local Storage (pastikan sebelumnya disimpan)
+          const id_user = userData.account_id;
+          if (!id_user) {
+            alert("User ID tidak ditemukan.");
+            return;
+          }
+    
+          // Panggil API
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id_user }),
+          });
+    
+          const result = await response.json();
+          if (!result.success) {
+            alert("Gagal memuat data profil.");
+            return;
+          }
+    
+          // Ambil data dari API
+          const { data, toko } = result;
+    
+          // Masukkan data ke form
+          const username = document.getElementById("username");
+          const firstname = document.getElementById("firstname");
+          const email = document.getElementById("email");
+          const phone = document.getElementById("phone");
+          const gender = document.getElementById("gender");
+          const birthdate = document.getElementById("birthdate");
+    
+          // Masukkan data ke masing-masing elemen
+          username.value = data.name; // Nama lengkap
+          firstname.value = data.name.split(" ")[0]; // Nama depan saja
+          email.value = data.Addresses[0]?.alamat || ""; // Alamat (jika ada)
+          phone.value = data.phone_number || ""; // Nomor telepon
+          gender.value = data.gender || ""; // Gender
+          birthdate.value = data.birth_date || ""; // Tanggal lahir
+    
+          // Simpan ID toko ke Local Storage
+          if (toko) {
+            localStorage.setItem("id_toko", toko.id_toko);
+          }
+        } catch (error) {
+          console.error("Error memuat profil:", error);
+        }
+      }
+    
+      // Panggil fungsi saat halaman dimuat
+      document.addEventListener("DOMContentLoaded", loadProfile);
+    </script> -->
 
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+  const API_URL = "http://localhost:3000/api/user/Profile";
+  const id_user = userData.account_id; // Ganti dengan ID user yang sesuai.
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_user }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const { success, data, toko } = await response.json();
+    // const genderElement = document.getElementById("gender");
+    // const genderElement = document.getElementById("gender");
+    // const options = Array.from(genderElement.options);
+    if (success) {
+      // Isi data ke dalam form
+      
+      document.getElementById("username").value = data.name; // Nama depan
+      document.getElementById("firstname").value = data.name.split(" ")[0];
+      document.getElementById("phone").value = data.phone_number;
+      document.getElementById("gender").value = data.gender;
+      // document.getElementById("gender").value = "woman";
+      document.getElementById("birthdate").value = data.birth_date.split("T")[0]; // Format tanggal
+      document.getElementById("email").value = data.Addresses[0]?.alamat || "";
+      
+
+      
+    //   console.log(options[0]);
+    // if (data.gender === "woman") {
+    //     genderElement.selectedIndex = 1;
+    //     genderElement.options[1].selected = true;
+    //     console.log("TEST");
+    //     // console.log(options[1].value);
+    //   }
+
+
+
+    //   console.log("Gender from API:", data.gender);
+    //   console.log("Select element:", document.getElementById("gender"));
+
+      // Simpan ID Toko ke localStorage
+      if (toko && toko.id_toko) {
+        localStorage.setItem("id_toko", toko.id_toko);
+      }
+    } else {
+      console.error("Failed to load profile data");
+    }
+  } catch (error) {
+    console.error("Error memuat profil:", error);
+  }
+});
+    </script>
+
+<script>
+  // Periksa apakah id_toko ada di localStorage
+  const id_toko = localStorage.getItem("id_toko");
+
+  // Referensi elemen kontainer
+  const container = document.getElementById("store-link-container");
+
+  if (id_toko) {
+    // Jika id_toko ada, arahkan ke halaman toko
+    container.innerHTML = `
+      <a href="toko.html?id_toko=${id_toko}">
+        <h5 style="color: grey;">View a Store!</h5>
+      </a>
+    `;
+  } else {
+    // Jika id_toko tidak ada, arahkan ke halaman buat toko
+    container.innerHTML = `
+      <a href="buat-toko-2.html">
+        <h5 style="color: grey;">Make a Store!</h5>
+      </a>
+    `;
+  }
+</script>
+
+<script>
+  document.getElementById("profile-form").addEventListener("submit", async (event) => {
+    event.preventDefault(); // Mencegah form refresh halaman
+
+    // Ambil data dari form
+    const name = document.getElementById("username").value;
+    const phone_number = document.getElementById("phone").value;
+    const gender = document.getElementById("gender").value;
+    const birth_date = document.getElementById("birthdate").value;
+    const account_id = userData.account_id;
+    
+
+    // Buat payload data untuk API
+    const payload = {
+        name,
+        phone_number,
+        gender,
+        birth_date,
+        account_id,
+    };
+
+    try {
+        // Kirim permintaan ke API
+        const response = await fetch("http://localhost:3000/api/user/UpdateProfile", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        // Parsing respons dari API
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.msg); // Menampilkan pesan sukses
+        } else {
+            alert(`Error: ${result.msg}`); // Menampilkan pesan error
+        }
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        alert("Terjadi kesalahan saat memperbarui profil. Silakan coba lagi.");
+    }
+});
+
+</script>
 
 		<!-- header footer JS -->
 		 <script src="js/headerfooterLogin.js"></script>
