@@ -65,34 +65,61 @@ if (!userData || !userData.account_id) {
     window.location.href = 'login.html';
 }
 console.log(userData.account_id);
-    window.addEventListener('beforeunload', async (event) => {
-  try {
-    // Data yang akan dikirim ke API
-    const id_user = userData.account_id; // Ganti dengan ID user yang sesuai
+//     window.addEventListener('beforeunload', async (event) => {
+//   try {
+//     // Data yang akan dikirim ke API
+//     const id_user = userData.account_id; // Ganti dengan ID user yang sesuai
 
-    // Panggil API menggunakan fetch
-    const response = await fetch('http://localhost:3000/api/user/ExitTransaksi', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id_user }),
-    });
+//     // Panggil API menggunakan fetch
+//     const response = await fetch('http://localhost:3000/api/user/ExitTransaksi', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ id_user }),
+//     });
 
-    // Opsional: Log hasil respons API
-    if (response.ok) {
-      const result = await response.json();
-      console.log(result); // Output: { success: true, msg: 'ANJAYY' }
-    } else {
-      console.error('Error saat memanggil API ExitTransaksi');
+//     // Opsional: Log hasil respons API
+//     if (response.ok) {
+//       const result = await response.json();
+//       console.log(result); // Output: { success: true, msg: 'ANJAYY' }
+//     } else {
+//       console.error('Error saat memanggil API ExitTransaksi');
+//     }
+//   } catch (error) {
+//     console.error('Terjadi kesalahan:', error);
+//   }
+
+//   // Pesan ini mungkin ditampilkan tergantung browser
+//   event.returnValue = ''; 
+// });
+
+
+if (window.performance.navigation.type !== 1) { // Cegah pada reload biasa
+  window.addEventListener('beforeunload', async (event) => {
+    // Kirim permintaan ExitTransaksi hanya jika diperlukan
+    try {
+      const id_user = userData.account_id;
+
+      const response = await fetch('http://localhost:3000/api/user/ExitTransaksi', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id_user }),
+      });
+
+      if (response.ok) {
+        console.log('API ExitTransaksi sukses dipanggil');
+      }
+    } catch (error) {
+      console.error('Kesalahan sebelum keluar:', error);
     }
-  } catch (error) {
-    console.error('Terjadi kesalahan:', error);
-  }
 
-  // Pesan ini mungkin ditampilkan tergantung browser
-  event.returnValue = ''; 
-});
+    event.returnValue = ''; // Tampilkan prompt (opsional, tergantung browser)
+  });
+}
+
 
 </script>
 <!doctype html>
@@ -796,7 +823,7 @@ const MulaiTransaksi = localStorage.getItem('id_transaksi');
     if (MulaiTransaksi) {
         console.log(MulaiTransaksi)            
     }else{
-        location.reload();
+        // location.reload();
     }
                         </script>    
                   </div>
@@ -813,7 +840,7 @@ const MulaiTransaksi = localStorage.getItem('id_transaksi');
                                     const CoTotal = localStorage.getItem("total");
                                     const diskon = localStorage.getItem("diskon");
                                     if (CoTotal == null) {
-                                        location.reload();
+                                        // location.reload();
                                     }
                                     if(diskon != null){
                                         document.write(`<p>Rp. ${diskon}</p>`)
@@ -838,7 +865,7 @@ const MulaiTransaksi = localStorage.getItem('id_transaksi');
                         
                         <Script>
                             if (CoTotal == null) {
-                                location.reload();
+                                // location.reload();
                             }
                             if(diskon != null){
                                 document.write(`<p>Rp. ${diskon}</p>`)
@@ -912,7 +939,7 @@ const MulaiTransaksi = localStorage.getItem('id_transaksi');
         }
         if (localStorage.getItem("voucher")){
             alert("Voucher Sudah terpasang");
-            location.reload();
+            // location.reload();
             return;
         }else {
             // Data untuk dikirim ke API

@@ -44,130 +44,146 @@
 		
     </head>
     <body>
-		<!-- Preloader -->
-        <div class="preloader">
-            <div class="loader">
-                <div class="loader-outter"></div>
-                <div class="loader-inner"></div>
-
-                <div class="indicator"> 
-					<img src="img/favicon.png">
-                </div>
-            </div>
-        </div>
-        <!-- End Preloader -->
-		<script>
-			const userData = JSON.parse(localStorage.getItem('userData'));
-			
-			const script = document.createElement('script'); // Membuat elemen <script> baru
-			
-			if (userData && userData.account_id != null) {
-			  script.src = "js/headerfooterLogin.js";
-			} else {
-			  script.src = "js/headerfooterManage.js";
-			}
-		  
-			document.head.appendChild(script); // Menyisipkan script ke dalam <head>
-		</script>
-		<my-header></my-header>
-		<script>
-			// Ambil id_toko dari URL
-const urlParams = new URLSearchParams(window.location.search);
-const id_toko = urlParams.get('id_toko');
-
-// Buat permintaan ke API
-fetch(`http://localhost:3000/api/user/Toko/${id_toko}`)
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            console.log('Data toko:', data.data);
-            // Render data ke dalam halaman
-            document.querySelector('.error-inner h1').textContent = data.data.nama_toko;
-            document.querySelector('.error-inner p').textContent = `${data.data.lokasi}, ${data.data.kota}`;
-        } else {
-            console.error('Toko not found');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-
-		</script>
-		<!-- Error Page -->
-		<section class="error-page section">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 offset-lg-3 col-12">
-						<!-- Error Inner -->
-						<div class="error-inner">
-							<img src="img/favicon.png">
-                            <h1 style="font-size: 66px;">Hellow</h1>
-							<p>Best store in Bali, and gave you a best product ever! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde molestias, atque soluta animi doloribus voluptatem dolor aliquid nisi, ab ratione exercitationem ipsam id blanditiis. Minima voluptates officia quam mollitia consequatur.</p>
-							<form class="search-form">
-								<input placeholder="Search from Here" type="text">
-								<button class="btn" type="submit"><i class="fa fa-search"></i></button>
-							</form>
-						</div>
-						<!--/ End Error Inner -->
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Store Page</title>
+			<link rel="stylesheet" href="css/styles.css">
+		</head>
+		<body>
+			<!-- Preloader -->
+			<div class="preloader">
+				<div class="loader">
+					<div class="loader-outter"></div>
+					<div class="loader-inner"></div>
+					<div class="indicator">
+						<img src="img/favicon.png" alt="Loading">
 					</div>
 				</div>
 			</div>
-		</section>	
-
-        <section class="product_section layout_padding" >
-			<div class="container">
-				<div class="section-title">
-					<h2>What We Sell</h2>
-					<p>This is our product Recomendation for today!!</p>
+			<!-- End Preloader -->
+		
+			<script>
+				const userData = JSON.parse(localStorage.getItem('userData'));
+				
+				const script = document.createElement('script'); // Membuat elemen <script> baru
+				  if (!userData || !userData.account_id) {
+					  alert('User tidak ditemukan, silakan login terlebih dahulu.');
+					   window.location.href = 'login.html';
+				  }
+				if (userData && userData.account_id != null) {
+				  script.src = "js/headerfooterLogin.js";
+				  console.log("kontol")
+				} else {
+				  script.src = "js/headerfooterManage.js";
+				}
+				
+				document.head.appendChild(script); // Menyisipkan script ke dalam <head>
+			  </script>
+		
+			<my-header></my-header>
+		
+			<!-- Error Page -->
+			<section class="error-page section">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 offset-lg-3 col-12">
+							<div class="error-inner">
+								<img src="img/favicon.png" alt="Store Logo">
+								<h1 style="font-size: 66px;">Hello</h1>
+								<p>Best store in Bali, providing you with the best products ever! Welcome to our store.</p>
+								<form class="search-form">
+									<input placeholder="Search from Here" type="text">
+									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="row">
-					<!-- <div class="col-sm-6 col-md-4 col-lg-4">
-					   <div class="box">
-						  <div class="option_container">
-							 <div class="options">
-								<a href="" class="option1">
-								Add To Cart 
-								</a>
-								<a href="" class="option3">
-								Buy Now
-								</a>
-								<a href="productDetail.html" class="option2">
-								Look More
-								</a>
-							 </div>
-						  </div>
-						  <div class="img-box">
-							 <img src="img/canang.png" alt="">
-						  </div>
-						  <div class="detail-box">
-							 <h5>
-								Canang
-							 </h5>
-							 <h6>
-								Rp. 5,000
-							 </h6>
-						  </div>
-					   </div>
-					</div> -->
-					<script>
-						const productSection = document.querySelector('.product_section .row');
-data.data.Products.forEach(product => {
-    const productHTML = `
-        <div class="col-sm-6 col-md-4 col-lg-4">
-            <div class="box">
-                <div class="img-box">
-                    <img src="img/${product.id_product}.png" alt="">
-                </div>
-                <div class="detail-box">
-                    <h5>${product.nama_product}</h5>
-                    <h6>Rp. ${product.harga}</h6>
-                </div>
-            </div>
-        </div>
-    `;
-    productSection.innerHTML += productHTML;
-});
-					</script>
+			</section>
+		
+			<!-- Product Section -->
+			<section class="product_section layout_padding">
+				<div class="container">
+					<div class="section-title">
+						<h2>What We Sell</h2>
+						<p>This is our product recommendation for today!</p>
+					</div>
+					<div class="row">
+						<!-- Products will be dynamically loaded here -->
+					</div>
 				</div>
-		</section>
+			</section>
+		
+			<script>
+				// Fetch and display store data
+				const urlParams = new URLSearchParams(window.location.search);
+				const id_toko = urlParams.get('id_toko');
+		
+				if (id_toko) {
+					const payload = { id_toko };
+		
+					fetch('http://localhost:3000/api/user/Toko', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(payload),
+					})
+						.then(response => {
+							if (!response.ok) {
+								throw new Error(`HTTP error! status: ${response.status}`);
+							}
+							return response.json();
+						})
+						.then(data => {
+							if (data.success && data.data) {
+								// Update store information
+								document.querySelector('.error-inner h1').textContent = data.data.nama_toko;
+								document.querySelector('.error-inner p').textContent = `${data.data.lokasi}, ${data.data.kota}, Jam Operasional ${data.data.jam_operasional}`;
+		
+								// Load products
+								const productSection = document.querySelector('.product_section .row');
+								if (data.data.Products && data.data.Products.length > 0) {
+									data.data.Products.forEach(product => {
+										const productHTML = `
+											<div class="col-sm-6 col-md-4 col-lg-4">
+												<div class="box">
+													<div class="img-box">
+														<img src="img/${product.id_product}.png" alt="${product.nama_product}">
+													</div>
+													<div class="detail-box">
+														<h5>${product.nama_product}</h5>
+														<h6>Rp. ${product.harga.toLocaleString('id-ID')}</h6>
+													</div>
+												</div>
+											</div>
+										`;
+										productSection.innerHTML += productHTML;
+									});
+								} else {
+									productSection.innerHTML = '<p>No products available at this time.</p>';
+								}
+							} else {
+								// If store not found
+								document.querySelector('.error-inner h1').textContent = "Store Not Found";
+								document.querySelector('.error-inner p').textContent = "Please check the store ID.";
+							}
+						})
+						.catch(error => {
+							console.error('Error:', error);
+							document.querySelector('.error-inner h1').textContent = "Error Occurred";
+							document.querySelector('.error-inner p').textContent = "Could not load store data.";
+						});
+				} else {
+					// If no store ID provided
+					document.querySelector('.error-inner h1').textContent = "No Store ID";
+					document.querySelector('.error-inner p').textContent = "Please include a valid store ID in the URL.";
+				}
+			</script>
+		</body>
+		</html>
+		
 		<!--/ End Error Page -->
 		
 		<my-footer></my-footer>

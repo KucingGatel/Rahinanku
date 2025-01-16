@@ -18,16 +18,12 @@ function tanggal() {
 
 const generateTokoID = async () => {
     try {
-      // Menghitung jumlah data di tabel Toko
       const count = await Toko.count();
   
-      // Menambahkan 1 untuk ID baru
       const newIdNumber = count + 2;
-  
-      // Format ID menjadi "toko" diikuti angka dengan padding nol (misalnya toko001)
+
       const formattedId = `toko${String(newIdNumber).padStart(3, '0')}`;
 
-    //   console.log(`Generated ID: ${formattedId}`);
       return formattedId;
     } catch (error) {
       console.error('Error generating toko ID:', error);
@@ -74,7 +70,7 @@ const TopToko = async (req,res) => {
 }
 
 const ReadTokoById = async (req,res) => {
-    const {id_toko} = req.params;
+    const {id_toko} = req.body;
     try {
         const read = await Toko.findOne({
             attributes: ['nama_toko', 'lokasi', 'jam_operasional', 'kota'],

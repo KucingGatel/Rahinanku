@@ -84,6 +84,13 @@ const readItem = async (req,res) =>{
             where: {
                 id_keranjang: id_user,
             },
+            include: [
+                {
+                    model: Product,
+                    attributes: ['nama_product'],
+                }
+            ]
+                    
         });
         // const total = await Cart.findOne({
         //     attributes: ['harga'],

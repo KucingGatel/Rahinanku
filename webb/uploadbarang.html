@@ -69,7 +69,7 @@
             }
           if (userData && userData.account_id != null) {
             script.src = "js/headerfooterLogin.js";
-            console.log("kontol")
+            // console.log("kontol")
           } else {
             script.src = "js/headerfooterManage.js";
           }
@@ -423,7 +423,7 @@
 				<div class="row" style="padding-left: 35%;">
           <main class="upload-page">
             <h1><span>Your Product</span></h1>
-            <form action="" >
+            <form action="" id="product-form">
               <!-- Product Name -->
               <div class="form-group">
                 <label for="product-name">Product Name</label>
@@ -431,7 +431,7 @@
                   id="product-name"
                   class="form-control"
                   type="text"
-                  name="product_name"
+                  name="nama_product"
                   placeholder="Enter the product name"
                   required
                   aria-label="Product Name"
@@ -444,7 +444,7 @@
                 <textarea
                   id="product-description"
                   class="form-control"
-                  name="product_description"
+                  name="deskripsi"
                   placeholder="Enter a detailed description of the product"
                   rows="5"
                   required
@@ -458,16 +458,16 @@
                 <select
                   id="product-category"
                   class="form-control"
-                  name="product_category"
+                  name="kategori"
                   required
                   aria-label="Product Category"
                 >
                   <option value="" disabled selected>Select a category</option>
-                  <option value="electronics">Nganten</option>
-                  <option value="fashion">Odalan</option>
-                  <option value="home">Rahinan</option>
-                  <option value="books">Otonanan</option>
-                  <option value="other">Ngaben</option>
+                  <option value="01">Nganten</option>
+                  <option value="02">Odalan</option>
+                  <option value="03">Rahinan</option>
+                  <option value="04">Otonanan</option>
+                  <option value="05">Ngaben</option>
                 </select>
               </div>
         
@@ -478,7 +478,7 @@
                   id="product-price"
                   class="form-control"
                   type="number"
-                  name="product_price"
+                  name="harga"
                   placeholder="Enter the price"
                   step="0.01"
                   min="0"
@@ -486,32 +486,82 @@
                   aria-label="Product Price"
                 />
               </div>
-        
-              <!-- Product Image -->
+
+              <!-- Product stock -->
               <div class="form-group">
-                <label for="product-image">Product Image</label>
+                <label for="product-stock">Product Stock</label>
                 <input
-                  id="product-image"
+                  id="product-stock"
                   class="form-control"
-                  type="file"
-                  name="product_image"
-                  accept="image/*"
+                  type="number"
+                  name="Stock"
+                  placeholder="Enter the product Stock"
                   required
-                  aria-label="Product Image"
+                  aria-label="Product Stock"
                 />
               </div>
         
               <!-- Submit Button -->
-              <button class="btn" onclick="redirectToToko()" type="submit">Upload Product</button>
+              <button class="btn" type="submit">Upload Product</button>
             </form>
           </main>
                     
                     <!-- <button class="btn" onclick="redirectToCheckEmail()"><div class="text-wrapper-2">Create Shop</div></button> -->
-                    <script>
+                    <!-- <script>
                       function redirectToToko() {
                         window.location.href = "toko.html"; 
                       }
-                    </script>
+                    </script> -->
+
+<script>
+  document.querySelector('form').addEventListener('submit', async (event) => {
+      event.preventDefault(); // Cegah reload halaman
+  
+      try {
+          // Ambil data dari localStorage
+          const account_id = userData.account_id;
+          const id_toko = localStorage.getItem('id_toko');
+          
+  
+          if (!account_id || !id_toko) {
+              alert('Account ID atau ID Toko tidak ditemukan di localStorage');
+              return;
+          }
+  
+          // Ambil data form
+          const formData = new FormData(event.target);
+          const data = {
+              account_id:account_id,
+              id_toko:id_toko,
+              nama_product: formData.get('nama_product'),
+              deskripsi: formData.get('deskripsi'),
+              harga: formData.get('harga'),
+              stock: formData.get('Stock'),
+              kategori: formData.get('kategori'),
+          };
+
+          // return console.log(data);  
+          
+          // Kirim ke API
+          const response = await fetch('http://localhost:3000/api/user/addProduct', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data),
+          });
+  
+          const result = await response.json();
+          if (response.ok) {
+              alert(result.msg);
+              window.location.href = `toko.html?id_toko=${id_toko}`; // Redirect ke halaman toko
+          } else {
+              alert(result.msg || 'Gagal menambahkan produk');
+          }
+      } catch (error) {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan saat mengirim data');
+      }
+  });
+  </script>
                     <div class="CTA-button">
                       
                     </div>

@@ -27,16 +27,11 @@ class MyHeader extends HTMLElement {
 											<li><a href="product.html">Product </a></li>
 											<li><a href="#">Category <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
-													<li><a href="404.html">Nganten</a></li>
-													<li><a href="404.html">Odalan</a></li>
-													<li><a href="404.html">Rahinan</a></li>
-													<li><a href="404.html">Otonanan</a></li>
-													<li><a href="404.html">Ngaben</a></li>
-													<li><a href="404.html">Nganten</a></li>
-													<li><a href="404.html">Odalan</a></li>
-													<li><a href="404.html">Rahinan</a></li>
-													<li><a href="404.html">Otonanan</a></li>
-													<li><a href="404.html">Ngaben</a></li>
+													<li><a href="?kategori=Nganten">Nganten</a></li>
+													<li><a href="?kategori=Odalan">Odalan</a></li>
+													<li><a href="?kategori=Rahinan">Rahinan</a></li>
+													<li><a href="?kategori=Otonan">Otonanan</a></li>
+													<li><a href="?kategori=Nganten">Ngaben</a></li>
 												</ul>
 											</li>
 											<li><a href="artikel.html">Blogs</a>
